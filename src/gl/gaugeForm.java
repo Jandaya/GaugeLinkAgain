@@ -479,6 +479,12 @@ private int isRevLimit(int x){
     return x;
 }
 
+private double calcSpeed(int RPM, int gear)
+{
+    return RPM * gear * 0.0043021;
+}
+
+
 public int isVtec(int x){
     if (x > 5000) {
         vtecdisplay.setText("VTEC!");
