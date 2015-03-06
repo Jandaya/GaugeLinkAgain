@@ -456,21 +456,21 @@ private void isVacuum(int x){
         boostLabel.setText("Vacuum");
     }
 }
-private int isBoostLimit(int x){
+public int isBoostLimit(int x){
     if (x > 20){
         x=20;
         psiLabel.setText("25 PSI");
     }
     return x;
 }
-private int isBoostLimitNeg(int x){
+public int isBoostLimitNeg(int x){
     if (x < -25){
         x = -25;
         psiLabel.setText("-25 PSI");
     }
     return x;
 }
-private int isRevLimit(int x){
+public int isRevLimit(int x){
     if (x > 9100) {
         x = 9100;
         rpm.setText("9100 RPM");
@@ -479,7 +479,7 @@ private int isRevLimit(int x){
     return x;
 }
 
-private double calcSpeed(int RPM, int gear)
+public double calcSpeed(int RPM, int gear)
 {
     return RPM * gear * 0.0043021;
 }
