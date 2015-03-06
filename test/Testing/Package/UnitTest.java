@@ -40,5 +40,11 @@ public class UnitTest {
         int expResult = 20;
         int result = instance.isBoostLimit(x);
         assertEquals(expResult, result);
+        System.out.println("Input was " + x + " and expected value is " + expResult);
+        x = 18;
+        expResult = 18;
+        result = instance.isBoostLimit(x);
+        assertEquals(expResult, result);
+        System.out.println("Input was " + x + " and expected value is " + expResult);   
     }
 }
