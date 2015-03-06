@@ -488,7 +488,7 @@ public double calcSpeed(int RPM, int gear)
 public int isVtec(int x){
     if (x > 5000) {
         vtecdisplay.setText("VTEC!");
-        //x += 4;
+        x += 100;
     }
     return x;
 }
