@@ -391,7 +391,7 @@ private void initThread() {
                         rpm.setText(rpmDecrease + " RPM");
                         
                         
-                        // decrease speed
+                        // decrease speed.
                         speedNum = x * currentGear *0.0043021;
                         speedNum = Math.round(speedNum * 100.0) / 100.0;
                         speedDecrease = Double.toString(speedNum);
