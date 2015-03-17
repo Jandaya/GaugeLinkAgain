@@ -341,6 +341,11 @@ private void initThread() {
                     x = isRevLimit(x);
                     
                     // increment speed and display
+                    speedNum = x * currentGear *0.0043021;
+                    speedNum = Math.round(speedNum * 100.0) / 100.0;
+                    speedIncrease = Double.toString(speedNum);
+                    speed.setText(speedIncrease + " MPH");
+                    /*
                    if ((currentGear == 1) && (speedNum < 45)){
                     speedNum=speedNum+.5;
                     speedIncrease = Double.toString(speedNum);
@@ -351,9 +356,10 @@ private void initThread() {
                     speedIncrease = Double.toString(speedNum);
                     speed.setText(speedIncrease + " MPH");
                    }
-                    
+                    */
+              
                     // RPM increase
-                    x+=100;        
+                    x = x + 100/currentGear;  
                     rpmIncrease = Integer.toString(x);
                     rpm.setText(rpmIncrease + " RPM");
                     
@@ -386,7 +392,8 @@ private void initThread() {
                         
                         
                         // decrease speed
-                        speedNum=speedNum - .5;
+                        speedNum = x * currentGear *0.0043021;
+                        speedNum = Math.round(speedNum * 100.0) / 100.0;
                         speedDecrease = Double.toString(speedNum);
                         speed.setText(speedDecrease + " MPH");
                         
