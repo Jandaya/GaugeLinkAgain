@@ -22,14 +22,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import eu.hansolo.steelseries.gauges.Radial;
+import java.awt.Color;
+import java.awt.*;
+import javax.swing.*;
 
 
 public class gauge extends javax.swing.JFrame {
     final static Radial gauge = new Radial();
     public static void createAndShowUI(final gaugeForm g) {
         final JFrame frame = new JFrame("gslkhflks");
+        Container con = frame.getContentPane();
+        con.setBackground(Color.black);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationByPlatform(true);
+        //frame.setBackground();
+        //frame.setBackground(Color.black);
+        
+        
+        
 
         JPanel panel = new JPanel() {
             @Override 

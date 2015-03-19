@@ -10,6 +10,9 @@ import javax.imageio.*;
 import java.io.*;
 import java.awt.image.*;
 import java.awt.geom.AffineTransform;
+import eu.hansolo.steelseries.gauges.Radial;
+import java.awt.Color;
+
 
 
 
@@ -22,26 +25,40 @@ public class Circle extends JPanel implements ActionListener {
         int makeone;
         gaugeForm g;
 	Timer timer;
+        gauge d;
+        int n = 0;
         //Image im = new Image();
         
 	Circle() {
 		super(null);
                 gl.gaugeForm gauge = new gl.gaugeForm();
                 gauge.setVisible(true);
+                gl.gauge g7 = new gl.gauge();
+                //g7.setVisible(true);
+                g7.createAndShowUI(gauge);
+                //g7.button.doClick();
+                d = g7;
                 g = gauge;
 		timer = new Timer(100, this);
 		timer.start();
 	}
         @Override
 	public void actionPerformed(ActionEvent e) {
+                
                 angle += g.speedNum/100;
 		if(angle > (2* Math.PI))
 			angle = 0.0;
+                
+                d.gauge.setValue(g.speedNum);
+                
 		repaint();
+                //d.gauge.setValueAnimated(g.speedNum);
+                
 	}
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+                g.setColor(Color.red);
 		int width = getWidth();
 		int height = getHeight();
 		int x = (int) (Math.cos(angle) * (width / 3) + (width / 2));
