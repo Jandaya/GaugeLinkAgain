@@ -522,11 +522,20 @@ public void shiftTell(int x)
     }
 }
 
+
 private void checkShift(int x, boolean eco){
-    if(x > 1800 && x < 2500 && eco)
-    checkShiftLabel.setText("Good economic shift!");
-    else if(x > 8500 && x < 9200 && !eco)
-    checkShiftLabel.setText("Good performance shift!");
+    
+    if(x < 1800 && eco)
+        checkShiftLabel.setText("Early shift.");
+    else if(x > 1800 && x < 2500 && eco)
+        checkShiftLabel.setText("Good economic shift!");
+    else if (x > 2500 && eco)
+        checkShiftLabel.setText("Late shift.");
+    
+    if(x < 8500 && !eco)
+         checkShiftLabel.setText("Early shift. (Too soon junior!)");
+    if(x > 8500 && x < 9200 && !eco)
+         checkShiftLabel.setText("Good performance shift!");
 
 }
     
