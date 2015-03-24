@@ -13,11 +13,6 @@ import java.awt.geom.AffineTransform;
 import eu.hansolo.steelseries.gauges.Radial;
 import java.awt.Color;
 
-
-
-
-
-
 //class for the circle
 public class Circle extends JPanel implements ActionListener {
 
