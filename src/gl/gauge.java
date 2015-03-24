@@ -77,7 +77,7 @@ public class gauge extends javax.swing.JFrame {
         gauge.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
         gauge.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
         gauge.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
-        gauge.setMaxValue(150);
+        gauge.setMaxValue(120);
         gauge2.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
         gauge2.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
         gauge2.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
