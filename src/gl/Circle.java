@@ -45,6 +45,8 @@ public class Circle extends JPanel implements ActionListener {
 			angle = 0.0;
                 
                 d.gauge.setValue(g.speedNum);
+                d.gauge2.setValue(g.x);
+                d.gauge3.setValue(g.boost);
                 
 		repaint();
                 //d.gauge.setValueAnimated(g.speedNum);
