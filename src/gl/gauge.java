@@ -36,9 +36,11 @@ public class gauge extends javax.swing.JFrame {
     final static LinearBargraph gauge3 = new LinearBargraph();
     public static void createAndShowUI(final gaugeForm g) {
         final JFrame frame = new JFrame("Dashboard");
+        frame.setResizable(false);
         Container con = frame.getContentPane();
         con.setBackground(Color.black);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setLocation(5, 510);
         frame.setLocationByPlatform(true);
         //frame.setBackground();
         //frame.setBackground(Color.black);

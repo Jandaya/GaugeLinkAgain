@@ -30,7 +30,8 @@ public class Main {
         JFrame frame = new JFrame("Circle");
         //JFrame f = new JFrame("f");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
+        //frame.setLocation(695,5);
+        frame.setResizable(false);
         //f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //frame.getContentPane().setBackground(Color.BLACK);
         //Container c = frame.getContentPane();
