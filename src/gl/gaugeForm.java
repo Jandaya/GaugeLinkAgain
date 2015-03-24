@@ -82,6 +82,14 @@ public class gaugeForm extends javax.swing.JFrame {
                 throttleButtonMouseReleased(evt);
             }
         });
+        throttleButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                throttleButtonKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                throttleButtonKeyReleased(evt);
+            }
+        });
 
         rpm.setText("RPM");
         rpm.setToolTipText("Engine Speed measured in rotations per minute");
@@ -124,12 +132,22 @@ public class gaugeForm extends javax.swing.JFrame {
                 shiftUpButtonMouseClicked(evt);
             }
         });
+        shiftUpButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                shiftUpButtonKeyPressed(evt);
+            }
+        });
 
         shiftDownButton.setText("Shift Down");
         shiftDownButton.setEnabled(false);
         shiftDownButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 shiftDownButtonMouseClicked(evt);
+            }
+        });
+        shiftDownButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                shiftDownButtonKeyPressed(evt);
             }
         });
 
@@ -317,7 +335,84 @@ private boolean mouseDown = false;
         
     }//GEN-LAST:event_shiftDownButtonMouseClicked
 
+    private void shiftUpButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_shiftUpButtonKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_A){      
+        
+        checkShift(x,isEconomic);
+        if (currentGear <= 5){
+            x-=1000;
+            currentGear+=1;
+            gearIncrease=Integer.toString(currentGear);
+            gearNumber.setText(gearIncrease);
+        }
+        }
+    }//GEN-LAST:event_shiftUpButtonKeyPressed
 
+    private void shiftDownButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_shiftDownButtonKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_Z){   
+            if (currentGear >= 2){
+           x+=1000;
+           currentGear-=1;
+           gearDecrease=Integer.toString(currentGear);
+           gearNumber.setText(gearDecrease);
+       }
+            
+        }
+    }//GEN-LAST:event_shiftDownButtonKeyPressed
+
+    private void throttleButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_throttleButtonKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_A){
+        checkShift(x,isEconomic);
+            if (currentGear <= 5){
+                x-=1000;
+                currentGear+=1;
+                gearIncrease=Integer.toString(currentGear);
+                gearNumber.setText(gearIncrease);
+            }
+        }
+        
+        if(evt.getKeyCode() == KeyEvent.VK_Z){   
+            if (currentGear >= 2){
+                x+=1000;
+                currentGear-=1;
+                gearDecrease=Integer.toString(currentGear);
+                gearNumber.setText(gearDecrease);
+            }
+        }
+        if(evt.getKeyCode() == KeyEvent.VK_SHIFT){
+            mouseDown = true;
+            initThread();
+        }
+    }//GEN-LAST:event_throttleButtonKeyPressed
+
+    private void throttleButtonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_throttleButtonKeyReleased
+        // TODO add your handling code here:
+        mouseDown = false;
+    }//GEN-LAST:event_throttleButtonKeyReleased
+
+    public void keyPressed(KeyEvent e){
+        if(e.getKeyCode() == KeyEvent.VK_A){
+        checkShift(x,isEconomic);
+            if (currentGear <= 5){
+                x-=1000;
+                currentGear+=1;
+                gearIncrease=Integer.toString(currentGear);
+                gearNumber.setText(gearIncrease);
+            }
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_Z){   
+            if (currentGear >= 2){
+                x+=1000;
+                currentGear-=1;
+                gearDecrease=Integer.toString(currentGear);
+                gearNumber.setText(gearDecrease);
+            }
+        }
+    }
 private boolean isRunning = false;
 private synchronized boolean checkAndMark() {
     if (isRunning) return false;
@@ -522,11 +617,20 @@ public void shiftTell(int x)
     }
 }
 
+
 private void checkShift(int x, boolean eco){
-    if(x > 1800 && x < 2500 && eco)
-    checkShiftLabel.setText("Good economic shift!");
-    else if(x > 8500 && x < 9200 && !eco)
-    checkShiftLabel.setText("Good performance shift!");
+    
+    if(x < 1800 && eco)
+        checkShiftLabel.setText("Early shift.");
+    else if(x > 1800 && x < 2500 && eco)
+        checkShiftLabel.setText("Good economic shift!");
+    else if (x > 2500 && eco)
+        checkShiftLabel.setText("Late shift.");
+    
+    if(x < 8500 && !eco)
+         checkShiftLabel.setText("Early shift. (Too soon junior!)");
+    if(x > 8500 && x < 9200 && !eco)
+         checkShiftLabel.setText("Good performance shift!");
 
 }
     
