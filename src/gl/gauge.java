@@ -17,11 +17,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JFrame.*;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import eu.hansolo.steelseries.gauges.Radial;
+import eu.hansolo.steelseries.gauges.*;
+import eu.hansolo.steelseries.*;
+import eu.hansolo.steelseries.tools.*;
 import java.awt.Color;
 import java.awt.*;
 import javax.swing.*;
@@ -29,8 +32,10 @@ import javax.swing.*;
 
 public class gauge extends javax.swing.JFrame {
     final static Radial gauge = new Radial();
+    final static Radial gauge2 = new Radial();
+    final static LinearBargraph gauge3 = new LinearBargraph();
     public static void createAndShowUI(final gaugeForm g) {
-        final JFrame frame = new JFrame("gslkhflks");
+        final JFrame frame = new JFrame("Dashboard");
         Container con = frame.getContentPane();
         con.setBackground(Color.black);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,14 +52,54 @@ public class gauge extends javax.swing.JFrame {
                 return new Dimension(300, 300);
             }
         };
+        JPanel panel2 = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(300, 300);
+            }
+        };
+        JPanel panel3 = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(100, 300);
+            }
+        };
+        JPanel mainPanel= new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
 
         //final Radial gauge = new Radial();
         gauge.setTitle("MPH");
+        gauge2.setTitle("RPM");
         gauge.setUnitString("");
+        gauge2.setUnitString("");
+        gauge3.setTitle("PSI");
+        gauge3.setOrientation(eu.hansolo.steelseries.tools.Orientation.VERTICAL);
+        gauge.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
+        gauge.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
+        gauge.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
+        gauge.setMaxValue(150);
+        gauge2.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
+        gauge2.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
+        gauge2.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
+        gauge2.setMinValue(0);
+        gauge2.setMaxValue(10000);
+        gauge2.setThreshold(8000);
+        gauge3.setBarGraphColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
+        gauge3.setMinValue(-25);
+        gauge3.setMaxValue(40);
+        //gauge2.setTickmarkSections(sctns);
+        //gauge.setPointerColor(RED);
 
         panel.setLayout(new BorderLayout());
         panel.add(gauge, BorderLayout.CENTER);
-        frame.add(panel);
+        panel2.setLayout(new BorderLayout());
+        panel2.add(gauge2, BorderLayout.CENTER);
+        panel3.setLayout(new BorderLayout());
+        panel3.add(gauge3, BorderLayout.CENTER);
+        mainPanel.add(panel);
+        mainPanel.add(panel2);
+        mainPanel.add(panel3);
+        frame.add(mainPanel);
 
         JPanel buttonsPanel = new JPanel();
         JLabel valueLabel = new JLabel("Value:");
@@ -69,7 +114,9 @@ public class gauge extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     double value = Double.valueOf(valueField.getText());
-                    gauge.setValueAnimated(g.speedNum);
+                    //gauge.setValueAnimated(g.speedNum);
+                    gauge2.setValueAnimated(g.x);
+                    gauge3.setValue(g.boost);
                 } catch(NumberFormatException ex) { 
                     //TODO - handle invalid input 
                     System.err.println("invalid input");
@@ -91,7 +138,8 @@ public class gauge extends javax.swing.JFrame {
         
     }
     public static void UPD(double d){
-            gauge.setValueAnimated(d);
+            //gauge.setValueAnimated(d);
+            gauge2.setValueAnimated(d);
     }
     
     
