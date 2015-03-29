@@ -189,7 +189,7 @@
     <Component class="javax.swing.JButton" name="startButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/gl/pressed_button.png"/>
+          <Image iconType="3" name="/gl/stop_button.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Start car"/>
         <Property name="borderPainted" type="boolean" value="false"/>
@@ -199,7 +199,7 @@
         </Property>
         <Property name="focusPainted" type="boolean" value="false"/>
         <Property name="pressedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/pressed_button.png"/>
+          <Image iconType="3" name="/gl/pressed_button.png"/>
         </Property>
       </Properties>
       <Events>
