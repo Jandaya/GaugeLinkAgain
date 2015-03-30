@@ -327,7 +327,8 @@ private boolean mouseDown = false;
         // Max gear is 6
         checkShift(x,isEconomic);
         if (currentGear <= 5){
-            x-=1000;
+            //x-=1000;
+            x = changeUp(x);
             currentGear+=1;
             gearIncrease=Integer.toString(currentGear);
             gearNumber.setText(gearIncrease);
@@ -353,7 +354,8 @@ private boolean mouseDown = false;
         
         checkShift(x,isEconomic);
         if (currentGear <= 5){
-            x-=1000;
+            //x-=1000;
+            x = changeUp(x);
             currentGear+=1;
             gearIncrease=Integer.toString(currentGear);
             gearNumber.setText(gearIncrease);
@@ -379,7 +381,8 @@ private boolean mouseDown = false;
         if(evt.getKeyCode() == KeyEvent.VK_A){
         checkShift(x,isEconomic);
             if (currentGear <= 5){
-                x-=1000;
+               // x-=1000;
+                x = changeUp(x);
                 currentGear+=1;
                 gearIncrease=Integer.toString(currentGear);
                 gearNumber.setText(gearIncrease);
@@ -388,7 +391,8 @@ private boolean mouseDown = false;
         
         if(evt.getKeyCode() == KeyEvent.VK_Z){   
             if (currentGear >= 2){
-                x+=1000;
+                //x+=1000;
+                x = changeDown(x);
                 currentGear-=1;
                 gearDecrease=Integer.toString(currentGear);
                 gearNumber.setText(gearDecrease);
@@ -556,9 +560,25 @@ private void goToSleep(int x){
     }
 }
 
-private void revUp(){
+private int changeUp(int RPM) {
+    double temp;
+    double tempGear;
+    temp = (double)RPM;
+    tempGear = (double)currentGear;
+    temp = temp*(1 - Math.pow(.8,(tempGear+3)));
+    return (int)temp;
+}
 
-    
+private int changeDown(int RPM) {
+    double temp;
+    double tempGear;
+    temp = (double)RPM;
+    tempGear = (double)currentGear;
+    temp = temp/(1 - Math.pow(.8,(tempGear+3)));
+    if (temp > 9100) {
+        checkShiftLabel.setText("You blew your engine! Let the RPM drop more before downshifting");
+    }
+    return (int)temp;
 }
 private void isBoost(int x){
     if (boost > 0){
