@@ -290,6 +290,7 @@ private boolean mouseDown = false;
         if(isStart)
         {
             startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
+            mouseDown = false;
             stopValues();
         }
         else{
@@ -398,9 +399,8 @@ private boolean mouseDown = false;
         // TODO add your handling code here:
         mouseDown = false;
     }//GEN-LAST:event_throttleButtonKeyReleased
-
     public void keyPressed(KeyEvent e){
-        if(e.getKeyCode() == KeyEvent.VK_A){
+        if(e.getKeyChar() == 'a'){
         checkShift(x,isEconomic);
             if (currentGear <= 5){
                 x-=1000;
@@ -410,7 +410,7 @@ private boolean mouseDown = false;
             }
         }
         
-        if(e.getKeyCode() == KeyEvent.VK_Z){   
+        if(e.getKeyChar() == 'z'){   
             if (currentGear >= 2){
                 x+=1000;
                 currentGear-=1;
@@ -485,6 +485,12 @@ private void initThread() {
                         //sleep so it doesn't decrease topo quickly
                         goToSleep(30);
                         
+                        //disable the loop once all of the parameters have been met.
+                        if (!isStart){
+                               System.out.println("stopped!");
+                        break;
+                        }
+                        
                         //decrement the RPM
                         x-=50;
                         // decrease the RPM
@@ -527,11 +533,14 @@ private void initThread() {
                         boost = isBoostLimitNeg(boost);
                         
                         shiftTell(x);
-                        //disable the loop once all of the parameters have been met.
-                        if (boost <= -25 && speedNum <= 0 && x <= 800){
-                               
-                        break;
-                    }
+                        
+                        // to exit loop when min reached disable comment:
+                        /*
+                        if (boost <=- 25 && x <= 800){
+                           break;
+                        }
+                        */
+                        
                         
                     }while (mouseDown == false);
                 
