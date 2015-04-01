@@ -25,17 +25,10 @@ public class gaugeForm extends javax.swing.JFrame {
     // x is RPM, will change in the future.
     int x = 0;
     double speedNum = 0;
-    int boost = 0;
-    int currentGear = 1;
-    String gearIncrease;
-    String gearDecrease;
-    String speedIncrease;
-    String speedDecrease;
-    String rpmIncrease;
-    String rpmDecrease;
-    String boostIncrease;
-    String boostDecrease;
-    boolean isEconomic;
+    int boost = 0, currentGear = 1;
+    String gearIncrease, gearDecrease, speedIncrease, speedDecrease, rpmIncrease, rpmDecrease, boostIncrease, boostDecrease;
+    boolean isEconomic, isStart = false;
+    
     public gaugeForm() {
         initComponents();
     }
@@ -294,18 +287,15 @@ private boolean mouseDown = false;
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         // TODO add your handling code here:
         // ----------->>>>>>>>>>> initialize values
-        x=800;
-        boost = -25;
-        speed.setText("0 MPH");
-        psiLabel.setText("-25 PSI");
-        boostLabel.setText("Vacuum");
-        rpm.setText("800 RPM");
-        mode.setEnabled(true);
-        throttleButton.setEnabled(true);
-        shiftUpButton.setEnabled(true);
-        shiftDownButton.setEnabled(true);
-        startButton.setEnabled(false);
-        isEconomic = true;
+        if(isStart)
+        {
+            startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
+            stopValues();
+        }
+        else{
+                startButton.setIcon(new ImageIcon(getClass().getResource("/gl/start_button.png.png")));
+                startValues();
+            }
     }//GEN-LAST:event_startButtonActionPerformed
 
     private void modeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeActionPerformed
@@ -549,6 +539,37 @@ private void initThread() {
             }
         }.start();
     }
+}
+
+private void startValues(){
+        x=800;
+        boost = -25;
+        speed.setText("0 MPH");
+        psiLabel.setText("-25 PSI");
+        boostLabel.setText("Vacuum");
+        rpm.setText("800 RPM");
+        mode.setEnabled(true);
+        throttleButton.setEnabled(true);
+        shiftUpButton.setEnabled(true);
+        shiftDownButton.setEnabled(true);
+        //startButton.setEnabled(true);
+        isEconomic = true;
+        isStart = true;
+}
+private void stopValues(){
+        x=0;
+        boost = 0;
+        speed.setText("0 MPH");
+        psiLabel.setText("0 PSI");
+        boostLabel.setText("Vacuum");
+        rpm.setText("0 RPM");
+        mode.setEnabled(false);
+        throttleButton.setEnabled(false);
+        shiftUpButton.setEnabled(false);
+        shiftDownButton.setEnabled(false);
+        //startButton.setEnabled(true);
+        isEconomic = false;
+        isStart = false;
 }
 
 
