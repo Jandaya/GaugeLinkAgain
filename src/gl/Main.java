@@ -1,6 +1,5 @@
 package gl;
 import gl.*;
-import java.awt.Color;
 import java.awt.*;
 
 import javax.swing.JFrame;
@@ -31,16 +30,11 @@ public class Main {
         //JFrame f = new JFrame("f");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //frame.setLocation(695,5);
-        frame.setResizable(false);
+        frame.setResizable(true);
         //f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //frame.getContentPane().setBackground(Color.BLACK);
         //Container c = frame.getContentPane();
         //c.setBackground(Color.red);
-        
-        
-        ImageIcon icon = new ImageIcon("carsprite.png");
-        JLabel label = new JLabel();
-        label.setIcon(icon);
 	frame.add(new Circle());
 	frame.setSize(700, 500);
 	frame.setVisible(true);
