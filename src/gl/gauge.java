@@ -98,6 +98,9 @@ public class gauge extends javax.swing.JFrame {
         panel2.add(gauge2, BorderLayout.CENTER);
         panel3.setLayout(new BorderLayout());
         panel3.add(gauge3, BorderLayout.CENTER);
+        panel.setBackground(Color.darkGray);
+        panel2.setBackground(Color.darkGray);
+        panel3.setBackground(Color.darkGray);
         mainPanel.add(panel);
         mainPanel.add(panel2);
         mainPanel.add(panel3);
