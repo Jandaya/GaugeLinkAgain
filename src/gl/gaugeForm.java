@@ -43,57 +43,31 @@ public class gaugeForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        throttleButton = new javax.swing.JButton();
-        rpm = new javax.swing.JLabel();
         vtecdisplay = new javax.swing.JLabel();
-        boostLabel = new javax.swing.JLabel();
-        psiLabel = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         startButton = new javax.swing.JButton();
-        speed = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        currentGearLabel = new javax.swing.JLabel();
-        gearNumber = new javax.swing.JLabel();
         shiftUpButton = new javax.swing.JButton();
         shiftDownButton = new javax.swing.JButton();
-        mode = new javax.swing.JButton();
-        shiftTell = new javax.swing.JLabel();
+        throttleButton = new javax.swing.JButton();
+        psiLabel = new javax.swing.JLabel();
+        boostLabel = new javax.swing.JLabel();
+        rpm = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        gearNumber = new javax.swing.JLabel();
+        currentGearLabel = new javax.swing.JLabel();
         checkShiftLabel = new javax.swing.JLabel();
+        speed = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        mode = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        shiftTell = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        throttleButton.setText("Throttle");
-        throttleButton.setToolTipText("Accelerate");
-        throttleButton.setEnabled(false);
-        throttleButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                throttleButtonMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                throttleButtonMouseReleased(evt);
-            }
-        });
-        throttleButton.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                throttleButtonKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                throttleButtonKeyReleased(evt);
-            }
-        });
-
-        rpm.setText("RPM");
-        rpm.setToolTipText("Engine Speed measured in rotations per minute");
-
-        boostLabel.setText("Boost");
-        boostLabel.setToolTipText("Turbo pressure");
-        boostLabel.setName("Boost"); // NOI18N
-
-        psiLabel.setText("PSI");
-        psiLabel.setToolTipText("(Pounds per square inch)");
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
 
         startButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gl/stop_button.png"))); // NOI18N
         startButton.setToolTipText("Start car");
@@ -107,21 +81,6 @@ public class gaugeForm extends javax.swing.JFrame {
                 startButtonActionPerformed(evt);
             }
         });
-
-        speed.setText("MPH");
-        speed.setToolTipText("Speed in Miles Per Hour");
-
-        jLabel3.setText("Speedometer");
-        jLabel3.setToolTipText("Moving speed of the car");
-
-        jLabel4.setText("Tachometer");
-        jLabel4.setToolTipText("Engine Speed measured in rotations per minute");
-
-        currentGearLabel.setText("Current Gear");
-        currentGearLabel.setToolTipText("Determines moving speed (MPH) and engine speed (RPM)");
-
-        gearNumber.setText("1");
-        gearNumber.setToolTipText("Determines moving speed (MPH) and engine speed (RPM)");
 
         shiftUpButton.setText("Shift up");
         shiftUpButton.setToolTipText("Change gear up (go faster)");
@@ -150,6 +109,53 @@ public class gaugeForm extends javax.swing.JFrame {
             }
         });
 
+        throttleButton.setText("Throttle");
+        throttleButton.setToolTipText("Accelerate");
+        throttleButton.setEnabled(false);
+        throttleButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                throttleButtonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                throttleButtonMouseReleased(evt);
+            }
+        });
+        throttleButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                throttleButtonKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                throttleButtonKeyReleased(evt);
+            }
+        });
+
+        psiLabel.setText("PSI");
+        psiLabel.setToolTipText("(Pounds per square inch)");
+
+        boostLabel.setText("Boost");
+        boostLabel.setToolTipText("Turbo pressure");
+        boostLabel.setName("Boost"); // NOI18N
+
+        rpm.setText("RPM");
+        rpm.setToolTipText("Engine Speed measured in rotations per minute");
+
+        jLabel4.setText("Tachometer");
+        jLabel4.setToolTipText("Engine Speed measured in rotations per minute");
+
+        gearNumber.setText("1");
+        gearNumber.setToolTipText("Determines moving speed (MPH) and engine speed (RPM)");
+
+        currentGearLabel.setText("Current Gear");
+        currentGearLabel.setToolTipText("Determines moving speed (MPH) and engine speed (RPM)");
+
+        checkShiftLabel.setText("Shift");
+
+        speed.setText("MPH");
+        speed.setToolTipText("Speed in Miles Per Hour");
+
+        jLabel3.setText("Speedometer");
+        jLabel3.setToolTipText("Moving speed of the car");
+
         mode.setText("Economic");
         mode.setEnabled(false);
         mode.addActionListener(new java.awt.event.ActionListener() {
@@ -158,108 +164,117 @@ public class gaugeForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText(" Mode:");
+
         shiftTell.setText("                   ");
 
-        checkShiftLabel.setText("Shift");
-
-        jLabel1.setText(" Mode:");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(285, 285, 285)
+                        .addComponent(checkShiftLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(mode, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(75, 75, 75)
+                                .addComponent(startButton)
+                                .addGap(59, 59, 59)
+                                .addComponent(shiftUpButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(shiftDownButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(throttleButton))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(boostLabel)
+                                    .addComponent(psiLabel))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(65, 65, 65)
+                                        .addComponent(rpm)
+                                        .addGap(130, 130, 130)
+                                        .addComponent(gearNumber)
+                                        .addGap(101, 101, 101)
+                                        .addComponent(speed))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jLabel4)
+                                        .addGap(89, 89, 89)
+                                        .addComponent(currentGearLabel)
+                                        .addGap(43, 43, 43)
+                                        .addComponent(jLabel3)
+                                        .addGap(44, 44, 44)
+                                        .addComponent(shiftTell)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkShiftLabel)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(mode)
+                        .addComponent(jLabel1)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(startButton)
+                        .addContainerGap(63, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(boostLabel)
+                                    .addComponent(jLabel4)
+                                    .addComponent(currentGearLabel)
+                                    .addComponent(jLabel3)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(shiftTell)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(psiLabel)
+                            .addComponent(rpm)
+                            .addComponent(gearNumber)
+                            .addComponent(speed))
+                        .addGap(61, 61, 61)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(shiftDownButton)
+                            .addComponent(throttleButton)
+                            .addComponent(shiftUpButton))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(147, 147, 147)
-                                .addComponent(vtecdisplay)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(gearNumber)
-                                .addGap(189, 189, 189))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(startButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(shiftUpButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(shiftDownButton)
-                                .addGap(13, 13, 13)))
-                        .addComponent(throttleButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(rpm)
-                            .addComponent(jLabel4))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(speed))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(127, 127, 127)
-                                .addComponent(currentGearLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                                .addComponent(jLabel3)))
-                        .addGap(50, 50, 50)))
-                .addGap(51, 51, 51))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(psiLabel)
-                            .addComponent(boostLabel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(checkShiftLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mode, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(shiftTell)
-                .addGap(20, 20, 20))
+                .addGap(147, 147, 147)
+                .addComponent(vtecdisplay)
+                .addGap(311, 470, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mode)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addComponent(shiftTell)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(checkShiftLabel)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(currentGearLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(vtecdisplay)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(vtecdisplay)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rpm)
-                            .addComponent(speed)))
-                    .addComponent(gearNumber))
-                .addGap(58, 58, 58)
-                .addComponent(boostLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(psiLabel)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(throttleButton)
-                    .addComponent(startButton)
-                    .addComponent(shiftUpButton)
-                    .addComponent(shiftDownButton))
-                .addGap(48, 48, 48))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -745,6 +760,7 @@ private void increment(int x){
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JButton mode;
     private javax.swing.JLabel psiLabel;
     private javax.swing.JLabel rpm;
