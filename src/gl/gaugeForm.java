@@ -283,10 +283,11 @@ private boolean mouseDown = false;
     private void throttleButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_throttleButtonMousePressed
         // TODO add your handling code here:
         //--------------->>>>>>>>>>> when mouse is clicked in.
-        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
-        mouseDown = true;
-        initThread();
-        
+        if(isStart){
+            if (evt.getButton() == java.awt.event.MouseEvent.BUTTON1) {
+            mouseDown = true;
+            initThread();
+        }
     }
     }//GEN-LAST:event_throttleButtonMousePressed
 
@@ -331,31 +332,34 @@ private boolean mouseDown = false;
     private void shiftUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shiftUpButtonMouseClicked
         // TODO add your handling code here:
         // Max gear is 6
-        checkShift(x,isEconomic);
-        if (currentGear <= 5){
-            //x-=1000;
-            x = changeUp(x);
-            currentGear+=1;
-            gearIncrease=Integer.toString(currentGear);
-            gearNumber.setText(gearIncrease);
+        if(isStart){
+            checkShift(x,isEconomic);
+            if (currentGear <= 5){
+                //x-=1000;
+                x = changeUp(x);
+                currentGear+=1;
+                gearIncrease=Integer.toString(currentGear);
+                gearNumber.setText(gearIncrease);
+            }
         }
-        
     }//GEN-LAST:event_shiftUpButtonMouseClicked
 
     private void shiftDownButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shiftDownButtonMouseClicked
         // TODO add your handling code here:
-        if (currentGear >= 2){
-           x+=1000;
-           currentGear-=1;
-           gearDecrease=Integer.toString(currentGear);
-           gearNumber.setText(gearDecrease);
-       }
-       
+        if(isStart){
+            if (currentGear >= 2){
+               x+=1000;
+               currentGear-=1;
+               gearDecrease=Integer.toString(currentGear);
+               gearNumber.setText(gearDecrease);
+           }
+        }
         
     }//GEN-LAST:event_shiftDownButtonMouseClicked
 
     private void shiftUpButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_shiftUpButtonKeyPressed
         // TODO add your handling code here:
+        
         if(evt.getKeyCode() == KeyEvent.VK_A){      
         
         checkShift(x,isEconomic);
