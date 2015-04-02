@@ -28,6 +28,7 @@ public class Circle extends JPanel implements ActionListener {
 		super(null);
                 gl.gaugeForm gauge = new gl.gaugeForm();
                 gauge.setVisible(true);
+                gauge.setBackground(Color.BLUE);
                 gl.gauge g7 = new gl.gauge();
                 //g7.setVisible(true);
                 g7.createAndShowUI(gauge);
