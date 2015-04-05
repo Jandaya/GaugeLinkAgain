@@ -1,6 +1,7 @@
 package gl;
 
 //comment
+import eu.hansolo.steelseries.tools.LedColor;
 import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,7 @@ public class gaugeForm extends javax.swing.JFrame {
     int boost = 0, currentGear = 1;
     String gearIncrease, gearDecrease, speedIncrease, speedDecrease, rpmIncrease, rpmDecrease, boostIncrease, boostDecrease;
     boolean isEconomic, isStart = false;
+    gauge Shift_ind;
     
     public gaugeForm() {
         initComponents();
@@ -250,10 +252,11 @@ public class gaugeForm extends javax.swing.JFrame {
                             .addComponent(gearNumber)
                             .addComponent(speed))
                         .addGap(61, 61, 61)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(shiftDownButton)
-                            .addComponent(throttleButton)
-                            .addComponent(shiftUpButton))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(throttleButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(shiftDownButton)
+                                .addComponent(shiftUpButton)))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
 
@@ -684,18 +687,22 @@ public void shiftTell(int x)
     {
         if(x > 9000)
         {
+            Shift_ind.gauge2.setLedColor(LedColor.GREEN_LED);
             shiftTell.setText("Shift Up");
         }
         else
+            Shift_ind.gauge2.setLedColor(LedColor.RED_LED);
             shiftTell.setText("");
     }    
     else
     {
         if(x > 2500)
         {
+            Shift_ind.gauge2.setLedColor(LedColor.GREEN_LED);
             shiftTell.setText("Shift Up");
         }
         else
+            Shift_ind.gauge2.setLedColor(LedColor.RED_LED);
             shiftTell.setText("");
     }
 }

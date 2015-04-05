@@ -89,6 +89,16 @@ public class gauge extends javax.swing.JFrame {
         gauge3.setBarGraphColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
         gauge3.setMinValue(-25);
         gauge3.setMaxValue(40);
+        gauge.setLedVisible(false);
+        
+        /* Track codes
+        gauge2.setTrackStart(8000);
+        gauge2.setTrackStop(10000);
+        gauge2.setTrackSection(9000);
+        gauge2.setTrackSectionColor(Color.YELLOW);
+        gauge2.setTrackStopColor(Color.RED);
+        gauge2.setTrackVisible(true);
+        */
         //gauge2.setTickmarkSections(sctns);
         //gauge.setPointerColor(RED);
 
