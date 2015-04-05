@@ -109,9 +109,13 @@ public class gaugeForm extends javax.swing.JFrame {
             }
         });
 
-        throttleButton.setText("Throttle");
+        throttleButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gl/pedalN.png"))); // NOI18N
         throttleButton.setToolTipText("Accelerate");
+        throttleButton.setBorderPainted(false);
+        throttleButton.setContentAreaFilled(false);
+        throttleButton.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/gl/pedalN.png"))); // NOI18N
         throttleButton.setEnabled(false);
+        throttleButton.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/gl/pedalY.png"))); // NOI18N
         throttleButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 throttleButtonMousePressed(evt);
@@ -175,6 +179,15 @@ public class gaugeForm extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(startButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(shiftUpButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(shiftDownButton)
+                        .addGap(45, 45, 45)
+                        .addComponent(throttleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(285, 285, 285)
                         .addComponent(checkShiftLabel)
                         .addGap(115, 115, 115)
@@ -182,40 +195,28 @@ public class gaugeForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(mode, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(boostLabel)
+                            .addComponent(psiLabel))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addComponent(startButton)
-                                .addGap(59, 59, 59)
-                                .addComponent(shiftUpButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(shiftDownButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(throttleButton))
+                                .addGap(65, 65, 65)
+                                .addComponent(rpm)
+                                .addGap(130, 130, 130)
+                                .addComponent(gearNumber)
+                                .addGap(101, 101, 101)
+                                .addComponent(speed))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(boostLabel)
-                                    .addComponent(psiLabel))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(65, 65, 65)
-                                        .addComponent(rpm)
-                                        .addGap(130, 130, 130)
-                                        .addComponent(gearNumber)
-                                        .addGap(101, 101, 101)
-                                        .addComponent(speed))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jLabel4)
-                                        .addGap(89, 89, 89)
-                                        .addComponent(currentGearLabel)
-                                        .addGap(43, 43, 43)
-                                        .addComponent(jLabel3)
-                                        .addGap(44, 44, 44)
-                                        .addComponent(shiftTell)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel4)
+                                .addGap(89, 89, 89)
+                                .addComponent(currentGearLabel)
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel3)
+                                .addGap(44, 44, 44)
+                                .addComponent(shiftTell)))))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,8 +230,7 @@ public class gaugeForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(107, 107, 107)
-                        .addComponent(startButton)
-                        .addContainerGap(79, Short.MAX_VALUE))
+                        .addComponent(startButton))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -253,8 +253,8 @@ public class gaugeForm extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(shiftDownButton)
                             .addComponent(throttleButton)
-                            .addComponent(shiftUpButton))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(shiftUpButton))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -264,7 +264,7 @@ public class gaugeForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(147, 147, 147)
                 .addComponent(vtecdisplay)
-                .addGap(311, 470, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -410,8 +410,10 @@ private boolean mouseDown = false;
         }
         if(evt.getKeyCode() == KeyEvent.VK_SHIFT){
             mouseDown = true;
+            throttleButton.setIcon(new ImageIcon("pedalY.png"));
             initThread();
         }
+            
     }//GEN-LAST:event_throttleButtonKeyPressed
 
     private void throttleButtonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_throttleButtonKeyReleased
@@ -498,7 +500,7 @@ private void initThread() {
                     
                 } while (mouseDown);
                 isRunning = false;
-                
+                throttleButton.setIcon(new ImageIcon("pedalN.png"));
                 // once the mouse is released, this loop is entered.
                     do {
                         //sleep so it doesn't decrease topo quickly
