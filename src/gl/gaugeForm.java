@@ -45,7 +45,6 @@ public class gaugeForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        vtecdisplay = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         startButton = new javax.swing.JButton();
         shiftUpButton = new javax.swing.JButton();
@@ -63,6 +62,7 @@ public class gaugeForm extends javax.swing.JFrame {
         mode = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         shiftTell = new javax.swing.JLabel();
+        vtecdisplay = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -211,13 +211,16 @@ public class gaugeForm extends javax.swing.JFrame {
                                 .addComponent(speed))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
-                                .addComponent(jLabel4)
-                                .addGap(89, 89, 89)
-                                .addComponent(currentGearLabel)
-                                .addGap(43, 43, 43)
-                                .addComponent(jLabel3)
-                                .addGap(44, 44, 44)
-                                .addComponent(shiftTell)))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(vtecdisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(89, 89, 89)
+                                        .addComponent(currentGearLabel)
+                                        .addGap(43, 43, 43)
+                                        .addComponent(jLabel3)
+                                        .addGap(44, 44, 44)
+                                        .addComponent(shiftTell)))))))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -225,10 +228,12 @@ public class gaugeForm extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkShiftLabel)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(mode)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(vtecdisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                        .addComponent(checkShiftLabel)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(107, 107, 107)
@@ -257,27 +262,18 @@ public class gaugeForm extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(shiftDownButton)
                                 .addComponent(shiftUpButton)))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addComponent(vtecdisplay)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(vtecdisplay)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
