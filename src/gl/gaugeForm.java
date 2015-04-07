@@ -28,8 +28,11 @@ public class gaugeForm extends javax.swing.JFrame {
     double speedNum = 0;
     int boost = 0, currentGear = 1;
     String gearIncrease, gearDecrease, speedIncrease, speedDecrease, rpmIncrease, rpmDecrease, boostIncrease, boostDecrease;
-    boolean isEconomic, isStart = false;
+    boolean isEconomic = true;
+    boolean isStart = false;
     gauge Shift_ind;
+    ImageIcon leaf = new ImageIcon("leafMode.png");
+    ImageIcon flag = new ImageIcon("Flag mode.png");
     
     public gaugeForm() {
         initComponents();
@@ -63,6 +66,7 @@ public class gaugeForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         shiftTell = new javax.swing.JLabel();
         vtecdisplay = new javax.swing.JLabel();
+        ModePic = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
 
         jLabel2.setText("jLabel2");
@@ -190,16 +194,13 @@ public class gaugeForm extends javax.swing.JFrame {
                 .addComponent(shiftDownButton)
                 .addGap(54, 54, 54)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(shiftTell)
-                        .addGap(292, 498, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(throttleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                    .addComponent(shiftTell)
+                    .addComponent(throttleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(292, 452, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(gearNumber)
                         .addGap(79, 79, 79)
                         .addComponent(rpm)
@@ -208,6 +209,9 @@ public class gaugeForm extends javax.swing.JFrame {
                         .addGap(52, 52, 52)
                         .addComponent(psiLabel))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(ModePic)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(vtecdisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(currentGearLabel))
@@ -233,22 +237,27 @@ public class gaugeForm extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(shiftTell)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vtecdisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(99, Short.MAX_VALUE)
+                        .addContainerGap(43, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(mode))
                         .addGap(27, 27, 27)
                         .addComponent(checkShiftLabel)
-                        .addGap(15, 15, 15)))
+                        .addGap(15, 15, 15))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(ModePic)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(shiftTell)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vtecdisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 11, Short.MAX_VALUE)
+                        .addGap(0, 31, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(50, 50, 50)
@@ -267,11 +276,11 @@ public class gaugeForm extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(boostLabel))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(speed)
                             .addComponent(psiLabel)))))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(startButton))
         );
 
@@ -283,7 +292,7 @@ public class gaugeForm extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 7, Short.MAX_VALUE)
+            .addGap(0, 133, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -348,11 +357,13 @@ private boolean mouseDown = false;
         if(isEconomic)
         {
             isEconomic = false;
+            ModePic.setIcon(flag);
             mode.setText("Performance");
         }
         else
         {
             isEconomic = true;
+            ModePic.setIcon(leaf);
             mode.setText("Economic");
         }
     }//GEN-LAST:event_modeActionPerformed
@@ -611,7 +622,11 @@ private void startValues(){
         shiftUpButton.setEnabled(true);
         shiftDownButton.setEnabled(true);
         //startButton.setEnabled(true);
-        isEconomic = true;
+        
+        if(isEconomic)
+            ModePic.setIcon(leaf);
+        else
+            ModePic.setIcon(flag);
         isStart = true;
 }
 private void stopValues(){
@@ -626,7 +641,9 @@ private void stopValues(){
         shiftUpButton.setEnabled(false);
         shiftDownButton.setEnabled(false);
         //startButton.setEnabled(true);
-        isEconomic = false;
+        
+        ModePic.setIcon(new ImageIcon(""));
+        //isEconomic = true;
         isStart = false;
 }
 
@@ -790,6 +807,7 @@ private void increment(int x){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ModePic;
     private javax.swing.JLabel boostLabel;
     private javax.swing.JLabel checkShiftLabel;
     private javax.swing.JLabel currentGearLabel;
