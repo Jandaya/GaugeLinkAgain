@@ -31,11 +31,10 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         //frame.setLocation(695,5);
         frame.setResizable(true);
-        //f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //frame.getContentPane().setBackground(Color.BLACK);
-        //Container c = frame.getContentPane();
-        //c.setBackground(Color.red);
+        
+        
 	frame.add(new Circle());
+        //frame.add(new gaugeForm());
 	frame.setSize(700, 500);
 	frame.setVisible(true);
         
