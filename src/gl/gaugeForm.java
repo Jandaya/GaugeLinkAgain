@@ -729,22 +729,22 @@ public void shiftTell(int x)
     {
         if(x > 9000)
         {
-            Shift_ind.gauge2.setLedColor(LedColor.GREEN_LED);
+            Shift_ind.rpmGauge.setLedColor(LedColor.GREEN_LED);
             shiftTell.setText("Shift Up");
         }
         else
-            Shift_ind.gauge2.setLedColor(LedColor.RED_LED);
+            Shift_ind.rpmGauge.setLedColor(LedColor.RED_LED);
             shiftTell.setText("");
     }    
     else
     {
         if(x > 2500)
         {
-            Shift_ind.gauge2.setLedColor(LedColor.GREEN_LED);
+            Shift_ind.rpmGauge.setLedColor(LedColor.GREEN_LED);
             shiftTell.setText("Shift Up");
         }
         else
-            Shift_ind.gauge2.setLedColor(LedColor.RED_LED);
+            Shift_ind.rpmGauge.setLedColor(LedColor.RED_LED);
             shiftTell.setText("");
     }
 }
