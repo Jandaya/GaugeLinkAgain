@@ -27,15 +27,17 @@ import eu.hansolo.steelseries.*;
 import eu.hansolo.steelseries.tools.*;
 import java.awt.Color;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.*;
 
 
 public class gauge extends javax.swing.JFrame {
-    final static Radial gauge = new Radial();
-    final static Radial gauge2 = new Radial();
-    final static Radial1Square gauge4 = new Radial1Square();
-    final static LinearBargraph gauge3 = new LinearBargraph();
-    final static DigitalRadial gauge5 = new DigitalRadial();
+    final static Radial mphGauge = new Radial();
+    final static Radial rpmGauge = new Radial();
+    final static Radial1Square fuelGauge = new Radial1Square();
+    final static LinearBargraph boostGauge = new LinearBargraph();
+    final static DigitalRadial tempGauge = new DigitalRadial();
     public static void createAndShowUI(final gaugeForm g) {
         final JFrame frame = new JFrame("Dashboard");
         frame.setResizable(false);       
@@ -49,79 +51,86 @@ public class gauge extends javax.swing.JFrame {
         
         
 
-        JPanel panel = new JPanel() {
+        JPanel mphPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
                 return new Dimension(300, 300);
             }
         };
-        JPanel panel2 = new JPanel() {
+        JPanel rpmPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
                 return new Dimension(300, 300);
             }
         };
-        JPanel panel3 = new JPanel() {
+        JPanel boostPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
                 return new Dimension(100, 300);
             }
         };
-        JPanel panel4 = new JPanel() {
+        JPanel fuelPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
                 return new Dimension(300, 300);
             }
         };
-        JPanel panel5 = new JPanel() {
+        JPanel tempPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
                 return new Dimension(300, 300);
             }
         };
-        JPanel mainPanel= new JPanel();
-        JPanel mainPanel1=new JPanel();
-        JPanel mainPanel2=new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
-        mainPanel1.setLayout(new BoxLayout(mainPanel1, BoxLayout.X_AXIS));
-        mainPanel2.setLayout(new BoxLayout(mainPanel2, BoxLayout.Y_AXIS));
+        JPanel startButtonPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(50, 50);
+            }
+        };
+        final JButton startButton = new JButton();
+        JPanel topRowPanel= new JPanel();
+        JPanel secondRowPanel=new JPanel();
+        JPanel allGaugesPanel=new JPanel();
+        topRowPanel.setLayout(new BoxLayout(topRowPanel, BoxLayout.X_AXIS));
+        secondRowPanel.setLayout(new BoxLayout(secondRowPanel, BoxLayout.X_AXIS));
+        allGaugesPanel.setLayout(new BoxLayout(allGaugesPanel, BoxLayout.Y_AXIS));
 
-        //final Radial gauge = new Radial();
-        gauge.setTitle("MPH");
-        gauge2.setTitle("RPM");
-        gauge.setUnitString("");
-        gauge2.setUnitString("");
-        gauge3.setTitle("PSI");
-        gauge3.setOrientation(eu.hansolo.steelseries.tools.Orientation.VERTICAL);
-        gauge.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
-        gauge.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
-        gauge.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
-        gauge.setMaxValue(120);
-        gauge2.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
-        gauge2.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
-        gauge2.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
-        gauge2.setMinValue(0);
-        gauge2.setMaxValue(10000);
-        gauge2.setThreshold(8000);
-        gauge3.setBarGraphColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
-        gauge3.setMinValue(-25);
-        gauge3.setMaxValue(40);
-        gauge.setLedVisible(false);
-        gauge4.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
-        gauge4.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
-        gauge4.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
-        gauge4.setTitle("Fuel");
-        gauge4.setUnitString("Liters");
-        gauge4.setValue(60);
-        gauge4.setLedVisible(false);
-        gauge5.setLcdVisible(false);
-        gauge5.setTitle("Temperature");
-        gauge5.setUnitString("T");
-        gauge5.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
-        gauge2.setTrackStart(8000);
-        gauge2.setTrackStop(10000);
-        gauge2.setTrackSectionColor(Color.GREEN);
-        gauge2.setTrackVisible(true);
+        //final Radial mphGauge = new Radial();
+        mphGauge.setTitle("MPH");
+        rpmGauge.setTitle("RPM");
+        mphGauge.setUnitString("");
+        rpmGauge.setUnitString("");
+        boostGauge.setTitle("PSI");
+        boostGauge.setOrientation(eu.hansolo.steelseries.tools.Orientation.VERTICAL);
+        mphGauge.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
+        mphGauge.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
+        mphGauge.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
+        mphGauge.setMaxValue(120);
+        rpmGauge.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
+        rpmGauge.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
+        rpmGauge.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
+        rpmGauge.setMinValue(0);
+        rpmGauge.setMaxValue(10000);
+        rpmGauge.setThreshold(8000);
+        boostGauge.setBarGraphColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
+        boostGauge.setMinValue(-25);
+        boostGauge.setMaxValue(40);
+        mphGauge.setLedVisible(false);
+        fuelGauge.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
+        fuelGauge.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
+        fuelGauge.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
+        fuelGauge.setTitle("Fuel");
+        fuelGauge.setUnitString("Liters");
+        fuelGauge.setValue(60);
+        fuelGauge.setLedVisible(false);
+        tempGauge.setLcdVisible(false);
+        tempGauge.setTitle("Temperature");
+        tempGauge.setUnitString("T");
+        tempGauge.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
+        rpmGauge.setTrackStart(8000);
+        rpmGauge.setTrackStop(10000);
+        rpmGauge.setTrackSectionColor(Color.GREEN);
+        rpmGauge.setTrackVisible(true);
         
         //gauge4.setTickmarkSectionsVisible(false);
         //gauge4.setGaugeType(GaugeType.TYPE1);
@@ -130,39 +139,41 @@ public class gauge extends javax.swing.JFrame {
         
         
         /* Track codes
-        gauge2.setTrackStart(8000);
-        gauge2.setTrackStop(10000);
-        gauge2.setTrackSection(9000);
-        gauge2.setTrackSectionColor(Color.YELLOW);
-        gauge2.setTrackStopColor(Color.RED);
-        gauge2.setTrackVisible(true);
+        rpmGauge.setTrackStart(8000);
+        rpmGauge.setTrackStop(10000);
+        rpmGauge.setTrackSection(9000);
+        rpmGauge.setTrackSectionColor(Color.YELLOW);
+        rpmGauge.setTrackStopColor(Color.RED);
+        rpmGauge.setTrackVisible(true);
         */
         //gauge2.setTickmarkSections(sctns);
         //gauge.setPointerColor(RED);
-
-        panel.setLayout(new BorderLayout());
-        panel.add(gauge, BorderLayout.CENTER);
-        panel2.setLayout(new BorderLayout());
-        panel2.add(gauge2, BorderLayout.CENTER);
-        panel3.setLayout(new BorderLayout());
-        panel3.add(gauge3, BorderLayout.CENTER);
-        panel4.setLayout(new BorderLayout());
-        panel4.add(gauge4, BorderLayout.CENTER);
-        panel.setBackground(Color.darkGray);
-        panel2.setBackground(Color.darkGray);
-        panel3.setBackground(Color.darkGray);
-        panel4.setBackground(Color.darkGray);
-        panel5.setLayout(new BorderLayout());
-        panel5.add(gauge5, BorderLayout.CENTER);
-        panel5.setBackground(Color.darkGray);
-        mainPanel.add(panel);
-        mainPanel.add(panel2);
-        mainPanel.add(panel3);
-        mainPanel1.add(panel4);
-        mainPanel1.add(panel5);
-        mainPanel2.add(mainPanel);
-        mainPanel2.add(mainPanel1);
-        frame.add(mainPanel2);
+        startButtonPanel.setLayout(new BorderLayout());
+        startButtonPanel.add(startButton, BorderLayout.CENTER);
+        mphPanel.setLayout(new BorderLayout());
+        mphPanel.add(mphGauge, BorderLayout.CENTER);
+        rpmPanel.setLayout(new BorderLayout());
+        rpmPanel.add(rpmGauge, BorderLayout.CENTER);
+        boostPanel.setLayout(new BorderLayout());
+        boostPanel.add(boostGauge, BorderLayout.CENTER);
+        fuelPanel.setLayout(new BorderLayout());
+        fuelPanel.add(fuelGauge, BorderLayout.CENTER);
+        mphPanel.setBackground(Color.darkGray);
+        rpmPanel.setBackground(Color.darkGray);
+        boostPanel.setBackground(Color.darkGray);
+        fuelPanel.setBackground(Color.darkGray);
+        tempPanel.setLayout(new BorderLayout());
+        tempPanel.add(tempGauge, BorderLayout.CENTER);
+        tempPanel.setBackground(Color.darkGray);
+        topRowPanel.add(mphPanel);
+        topRowPanel.add(rpmPanel);
+        topRowPanel.add(boostPanel);
+        secondRowPanel.add(fuelPanel);
+        secondRowPanel.add(tempPanel);
+        allGaugesPanel.add(topRowPanel);
+        allGaugesPanel.add(secondRowPanel);
+        allGaugesPanel.add(startButtonPanel);
+        frame.add(allGaugesPanel);
 
         JPanel buttonsPanel = new JPanel();
         JLabel valueLabel = new JLabel("Value:");
@@ -172,20 +183,20 @@ public class gauge extends javax.swing.JFrame {
         JButton button = new JButton("Set");
         
         
-        button.addActionListener(new ActionListener(){
+        startButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    double value = Double.valueOf(valueField.getText());
-                    //gauge.setValueAnimated(g.speedNum);
-                    gauge2.setValueAnimated(g.x);
-                    gauge3.setValue(g.boost);
+                    //g.throttleButtonMousePressed();
+                    startButton.setText("Hello");
+                    
                 } catch(NumberFormatException ex) { 
                     //TODO - handle invalid input 
                     System.err.println("invalid input");
                 }
             }
         });
+        
         
         
 
@@ -203,7 +214,7 @@ public class gauge extends javax.swing.JFrame {
     }
     public static void UPD(double d){
             //gauge.setValueAnimated(d);
-            gauge2.setValueAnimated(d);
+            rpmGauge.setValueAnimated(d);
     }
     
     
