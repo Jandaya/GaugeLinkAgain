@@ -218,6 +218,32 @@ public class gauge extends javax.swing.JFrame {
                 }
             }
         });
+        throttleButton.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseExited(MouseEvent evt){
+                //throttleButton.setBackground(Color.red);
+            }
+            @Override
+            public void mouseEntered(MouseEvent evt){
+                throttleButton.setBackground(Color.red);
+            }
+            @Override
+            public void mouseReleased(MouseEvent evt){
+                throttleButton.setBackground(Color.blue);
+            }
+            @Override
+            public void mousePressed(MouseEvent evt){
+                if (evt.getButton() == java.awt.event.MouseEvent.MOUSE_PRESSED){
+                    throttleButton.setBackground(Color.black);
+                    
+                }
+                throttleButton.setBackground(Color.black);
+            }
+            @Override
+            public void mouseClicked(MouseEvent evt){
+                
+            }
+        });
         
         
         
