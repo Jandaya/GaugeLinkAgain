@@ -25,7 +25,7 @@ public class Main {
         //gauge.setVisible(true);
         // TODO code application logic here
         //Circle cir = new Circle();
-        
+        /*
         JFrame frame = new JFrame("Circle");
         //JFrame f = new JFrame("f");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -37,6 +37,10 @@ public class Main {
         //frame.add(new gaugeForm());
 	frame.setSize(700, 500);
 	frame.setVisible(true);
+        */
+        
+        gauge displayG = new gauge();
+        displayG.createAndShowUI();
         
     }
     
