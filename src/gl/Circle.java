@@ -45,12 +45,12 @@ public class Circle extends JPanel implements ActionListener {
 		if(angle > (2* Math.PI))
 			angle = 0.0;
                 
-                d.gauge.setValue(g.speedNum);
-                d.gauge2.setValue(g.x);
-                d.gauge3.setValue(g.boost);
+                d.mphGauge.setValue(g.speedNum);
+                d.rpmGauge.setValue(g.x);
+                d.boostGauge.setValue(g.boost);
                 
 		repaint();
-                //d.gauge.setValueAnimated(g.speedNum);
+                //d.mphGauge.setValueAnimated(g.speedNum);
                 
 	}
 	@Override
