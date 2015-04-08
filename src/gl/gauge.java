@@ -41,6 +41,7 @@ public class gauge extends javax.swing.JFrame {
     final static DigitalRadial tempGauge = new DigitalRadial();
     final static JButton startButton = new JButton();
     final static JButton throttleButton = new JButton();
+    boolean mouseOnThrottle = false;
     //Image stopImage = new Image(getClass().getResource("/gl/stop_button.png"));
     //final static ImageIcon stopImage = new ImageIcon(getClass().getResource("/gl/stop_button.png"));
     //startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
@@ -114,7 +115,7 @@ public class gauge extends javax.swing.JFrame {
         allButtonsPanel.setLayout(new BoxLayout(allButtonsPanel, BoxLayout.X_AXIS));
         allGaugesPanel.setLayout(new BoxLayout(allGaugesPanel, BoxLayout.Y_AXIS));
         
-        startButtonLook();
+        ButtonLook();
         
         //final Radial mphGauge = new Radial();
         mphGauge.setTitle("MPH");
@@ -210,7 +211,7 @@ public class gauge extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     //g.throttleButtonMousePressed();
-                    startButton.setText("Hello");
+                    //startButton.setText("Hello");
                     
                 } catch(NumberFormatException ex) { 
                     //TODO - handle invalid input 
@@ -218,30 +219,29 @@ public class gauge extends javax.swing.JFrame {
                 }
             }
         });
+        
         throttleButton.addMouseListener(new MouseListener(){
             @Override
             public void mouseExited(MouseEvent evt){
-                //throttleButton.setBackground(Color.red);
+                
             }
             @Override
             public void mouseEntered(MouseEvent evt){
-                throttleButton.setBackground(Color.red);
+                
             }
             @Override
             public void mouseReleased(MouseEvent evt){
-                throttleButton.setBackground(Color.blue);
+                throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
             }
             @Override
             public void mousePressed(MouseEvent evt){
-                if (evt.getButton() == java.awt.event.MouseEvent.MOUSE_PRESSED){
-                    throttleButton.setBackground(Color.black);
-                    
-                }
-                throttleButton.setBackground(Color.black);
+                throttleButton.setBackground(Color.darkGray);
+                throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalY.png")));
+                
             }
             @Override
             public void mouseClicked(MouseEvent evt){
-                
+                throttleButton.setBackground(Color.darkGray);
             }
         });
         
@@ -263,10 +263,13 @@ public class gauge extends javax.swing.JFrame {
             //gauge.setValueAnimated(d);
             rpmGauge.setValueAnimated(d);
     }
-    public void startButtonLook() {                                            
+    public void ButtonLook() {                                            
         
             startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
+            startButton.setBackground(Color.darkGray);
             
+            throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
+            throttleButton.setBackground(Color.darkGray);
                 
             
         }
