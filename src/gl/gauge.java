@@ -30,6 +30,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
+import javax.imageio.*;
 
 
 public class gauge extends javax.swing.JFrame {
@@ -38,7 +39,12 @@ public class gauge extends javax.swing.JFrame {
     final static Radial1Square fuelGauge = new Radial1Square();
     final static LinearBargraph boostGauge = new LinearBargraph();
     final static DigitalRadial tempGauge = new DigitalRadial();
-    public static void createAndShowUI(final gaugeForm g) {
+    final static JButton startButton = new JButton();
+    final static JButton throttleButton = new JButton();
+    //Image stopImage = new Image(getClass().getResource("/gl/stop_button.png"));
+    //final static ImageIcon stopImage = new ImageIcon(getClass().getResource("/gl/stop_button.png"));
+    //startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
+    public void createAndShowUI() {
         final JFrame frame = new JFrame("Dashboard");
         frame.setResizable(false);       
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,29 +78,44 @@ public class gauge extends javax.swing.JFrame {
         JPanel fuelPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
-                return new Dimension(300, 300);
+                return new Dimension(100, 100);
             }
         };
         JPanel tempPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
-                return new Dimension(300, 300);
+                return new Dimension(100, 100);
             }
         };
         JPanel startButtonPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
-                return new Dimension(50, 50);
+                return new Dimension(100, 100);
             }
         };
-        final JButton startButton = new JButton();
+        JPanel throttleButtonPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(100, 100);
+            }
+        };
+        JPanel allButtonsPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(200, 200);
+            }
+        };
+        
         JPanel topRowPanel= new JPanel();
         JPanel secondRowPanel=new JPanel();
         JPanel allGaugesPanel=new JPanel();
         topRowPanel.setLayout(new BoxLayout(topRowPanel, BoxLayout.X_AXIS));
         secondRowPanel.setLayout(new BoxLayout(secondRowPanel, BoxLayout.X_AXIS));
+        allButtonsPanel.setLayout(new BoxLayout(allButtonsPanel, BoxLayout.X_AXIS));
         allGaugesPanel.setLayout(new BoxLayout(allGaugesPanel, BoxLayout.Y_AXIS));
-
+        
+        startButtonLook();
+        
         //final Radial mphGauge = new Radial();
         mphGauge.setTitle("MPH");
         rpmGauge.setTitle("RPM");
@@ -150,6 +171,8 @@ public class gauge extends javax.swing.JFrame {
         //gauge.setPointerColor(RED);
         startButtonPanel.setLayout(new BorderLayout());
         startButtonPanel.add(startButton, BorderLayout.CENTER);
+        throttleButtonPanel.setLayout(new BorderLayout());
+        throttleButtonPanel.add(throttleButton, BorderLayout.CENTER);
         mphPanel.setLayout(new BorderLayout());
         mphPanel.add(mphGauge, BorderLayout.CENTER);
         rpmPanel.setLayout(new BorderLayout());
@@ -165,22 +188,21 @@ public class gauge extends javax.swing.JFrame {
         tempPanel.setLayout(new BorderLayout());
         tempPanel.add(tempGauge, BorderLayout.CENTER);
         tempPanel.setBackground(Color.darkGray);
+        topRowPanel.add(fuelPanel);
         topRowPanel.add(mphPanel);
         topRowPanel.add(rpmPanel);
         topRowPanel.add(boostPanel);
-        secondRowPanel.add(fuelPanel);
-        secondRowPanel.add(tempPanel);
+        topRowPanel.add(tempPanel);
+        //secondRowPanel.add(fuelPanel);
+        //secondRowPanel.add(tempPanel);
         allGaugesPanel.add(topRowPanel);
-        allGaugesPanel.add(secondRowPanel);
-        allGaugesPanel.add(startButtonPanel);
+        //allGaugesPanel.add(secondRowPanel);
+        allButtonsPanel.add(startButtonPanel);
+        allButtonsPanel.add(throttleButtonPanel);
+        allGaugesPanel.add(allButtonsPanel);
         frame.add(allGaugesPanel);
 
-        JPanel buttonsPanel = new JPanel();
-        JLabel valueLabel = new JLabel("Value:");
-
-        final JTextField valueField = new JTextField(7);
-        valueField.setText("30");
-        JButton button = new JButton("Set");
+        
         
         
         startButton.addActionListener(new ActionListener(){
@@ -203,9 +225,8 @@ public class gauge extends javax.swing.JFrame {
         //buttonsPanel.add(valueLabel);
         //buttonsPanel.add(valueField);
         //buttonsPanel.add(button);
-        g.pack();
-        g.setVisible(true);
-        frame.add(buttonsPanel, BorderLayout.NORTH);
+        
+        
 
         frame.pack();
         frame.setVisible(true);
@@ -216,6 +237,13 @@ public class gauge extends javax.swing.JFrame {
             //gauge.setValueAnimated(d);
             rpmGauge.setValueAnimated(d);
     }
+    public void startButtonLook() {                                            
+        
+            startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
+            
+                
+            
+        }
     
     
 }
