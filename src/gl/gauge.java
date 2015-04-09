@@ -214,10 +214,12 @@ public class gauge extends javax.swing.JFrame {
                 if (isStart){
                     startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
                     isStart = false;
+                    stopValues();
                 }
                 else{
                     startButton.setIcon(new ImageIcon(getClass().getResource("/gl/start_button.png.png")));
                     isStart = true;
+                    startValues();
                 }
             }
             @Override
@@ -252,6 +254,7 @@ public class gauge extends javax.swing.JFrame {
                 throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalY.png")));
                 if (isStart){
                     mouseDown = true; 
+                    initThread();
                 } 
             }
             @Override
@@ -283,16 +286,152 @@ private synchronized boolean checkAndMark() {
     if (isRunning) return false;
     isRunning = true;
     return true;
-}  
+} 
+
+
+
+// creates a thread in run time
+private void initThread() {
+    if (checkAndMark()) {
+        new Thread() {
+            public void run() {
+                do {
+                    //sleeps the system, so that we dont build the values too fast
+                    goToSleep(30);
+                    
+                    // checks to display vtec
+                    x = isVtec(x);
+                    // checks rev limit, 
+                    x = isRevLimit(x);
+                    
+                    // increment speed and display
+                    speedNum = x * currentGear *0.0043021;
+                    speedNum = Math.round(speedNum * 100.0) / 100.0;
+                    speedIncrease = Double.toString(speedNum);
+                    //speed.setText(speedIncrease + " MPH");
+                    mphGauge.setValue(speedNum);
+                    /*
+                   if ((currentGear == 1) && (speedNum < 45)){
+                    speedNum=speedNum+.5;
+                    speedIncrease = Double.toString(speedNum);
+                    speed.setText(speedIncrease + " MPH");
+                   }
+                   else if ((currentGear == 2) && (speedNum < 60)){
+                    speedNum=speedNum+.5;
+                    speedIncrease = Double.toString(speedNum);
+                    speed.setText(speedIncrease + " MPH");
+                   }
+                    */
+              
+                    // RPM increase
+                    x = x + 100/currentGear;  
+                    rpmIncrease = Integer.toString(x);
+                    rpmGauge.setValue(x);
+                    //rpm.setText(rpmIncrease + " RPM");
+                    
+                    //increase boost with a limit of 20
+                    boost++;
+                    boostIncrease = Integer.toString(boost);
+                    boostGauge.setValue(boost);
+                    //psiLabel.setText(boostIncrease + " PSI");
+                    
+                    isBoost(boost);
+                    isVacuum(boost);
+                    
+                    boost = isBoostLimit(boost);
+                    
+                    shiftTell(x);
+                    
+                    
+                } while (mouseDown);
+                isRunning = false;
+                throttleButton.setIcon(new ImageIcon("pedalN.png"));
+                // once the mouse is released, this loop is entered.
+                    do {
+                        //sleep so it doesn't decrease topo quickly
+                        goToSleep(30);
+                        
+                        //disable the loop once all of the parameters have been met.
+                        if (!isStart){
+                               //System.out.println("stopped!");
+                        break;
+                        }
+                        
+                        //decrement the RPM
+                        x-=50;
+                        // decrease the RPM
+                        rpmDecrease = Integer.toString(x);
+                        rpmGauge.setValue(x);
+                        //rpm.setText(rpmDecrease + " RPM");
+                        
+                        
+                        // decrease speed.
+                        speedNum = x * currentGear *0.0043021;
+                        speedNum = Math.round(speedNum * 100.0) / 100.0;
+                        speedDecrease = Double.toString(speedNum);
+                        mphGauge.setValue(speedNum);
+                        //speed.setText(speedDecrease + " MPH");
+                        
+                        // to synchronize, forces speed to only have a min value of 0
+                        if(speedNum < 0){
+                            speedNum = 0;
+                            speedDecrease = Double.toString(speedNum);
+                            mphGauge.setValue(speedNum);
+                            //speed.setText(speedDecrease + " MPH");
+                        }
+                        
+                        
+                        
+                        //vtec remove once dropped out of 5000
+                        if (x < 5000)
+                            //vtecdisplay.setText("");
+                      
+                        // minimum RPM is 800
+                        if (x <= 800) {
+                            x=800;
+                            rpmDecrease = Integer.toString(x);
+                            rpmGauge.setValue(x);
+                            //rpm.setText(rpmDecrease + " RPM");
+                        } 
+                        
+                        // decrement boost, only allow for -25
+                        boost--;
+                        boostDecrease = Integer.toString(boost);
+                        boostGauge.setValue(boost);
+                        //psiLabel.setText(boostDecrease + " PSI");
+                        isBoost(boost);
+                        isVacuum(boost);
+                        boost = isBoostLimitNeg(boost);
+                        
+                        shiftTell(x);
+                        
+                        // to exit loop when min reached disable comment:
+                        /*
+                        if (boost <=- 25 && x <= 800){
+                           break;
+                        }
+                        */
+                        
+                        
+                    }while (mouseDown == false);
+                
+                  
+            }
+        }.start();
+    }
+}
 private void startValues(){
         x=800;
         boost = -25;
+        rpmGauge.setValue(x);
+        mphGauge.setValue(0);
+        boostGauge.setValue(boost);
         //speed.setText("0 MPH");
         //psiLabel.setText("-25 PSI");
         //boostLabel.setText("Vacuum");
         //rpm.setText("800 RPM");
         //mode.setEnabled(true);
-        throttleButton.setEnabled(true);
+        //throttleButton.setEnabled(true);
         //shiftUpButton.setEnabled(true);
         //shiftDownButton.setEnabled(true);
         startButton.setEnabled(true);
@@ -308,12 +447,15 @@ private void startValues(){
 private void stopValues(){
         x=0;
         boost = 0;
+        rpmGauge.setValue(x);
+        mphGauge.setValue(0);
+        boostGauge.setValue(boost);
         //speed.setText("0 MPH");
         //psiLabel.setText("0 PSI");
         //boostLabel.setText("Vacuum");
         //rpm.setText("0 RPM");
         //mode.setEnabled(false);
-        throttleButton.setEnabled(false);
+        //throttleButton.setEnabled(false);
         //shiftUpButton.setEnabled(false);
         //shiftDownButton.setEnabled(false);
         startButton.setEnabled(true);
