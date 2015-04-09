@@ -44,10 +44,19 @@ public class gauge extends javax.swing.JFrame {
     final static DigitalRadial tempGauge = new DigitalRadial();
     final static JButton startButton = new JButton();
     final static JButton throttleButton = new JButton();
-    boolean isStarted = false;
+    boolean isStart = false;
+    boolean isEconomic = true;
     boolean mouseOnThrottle = false;
-    double mphNum = 0;
+    double speedNum = 0;
+    int x = 0;
+    int boost = 0, currentGear = 1;
+    String gearIncrease, gearDecrease, speedIncrease, speedDecrease, rpmIncrease, rpmDecrease, boostIncrease, boostDecrease;
     boolean buttonPressed = false;
+    ImageIcon leaf = new ImageIcon("leafMode.png");
+    ImageIcon flag = new ImageIcon("Flag mode.png");
+    private boolean mouseDown = false;
+    
+    
     //Image stopImage = new Image(getClass().getResource("/gl/stop_button.png"));
     //final static ImageIcon stopImage = new ImageIcon(getClass().getResource("/gl/stop_button.png"));
     //startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
@@ -57,7 +66,6 @@ public class gauge extends javax.swing.JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setLocation(5, 510);
         frame.setLocationByPlatform(true);
-        
 
 
         JPanel mphPanel = new JPanel() {
@@ -222,13 +230,13 @@ public class gauge extends javax.swing.JFrame {
             }
             @Override
             public void mouseReleased(MouseEvent evt){
-                if (isStarted){
+                if (isStart){
                     startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
-                    isStarted = false;
+                    isStart = false;
                 }
                 else{
                     startButton.setIcon(new ImageIcon(getClass().getResource("/gl/start_button.png.png")));
-                    isStarted = true;
+                    isStart = true;
                 }
             }
             @Override
@@ -253,21 +261,17 @@ public class gauge extends javax.swing.JFrame {
             }
             @Override
             public void mouseReleased(MouseEvent evt){
-                buttonPressed = false;
+                mouseDown = false;
                 throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
-                if (isStarted){
-                    mphGauge.setValue(0);
-                }
+                
             }
             @Override
             public void mousePressed(MouseEvent evt){
-                buttonPressed = true;
                 throttleButton.setBackground(Color.darkGray);
                 throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalY.png")));
-                if (isStarted){
-                    mphIncrease();
-                }
-                
+                if (isStart){
+                    mouseDown = true; 
+                } 
             }
             @Override
             public void mouseClicked(MouseEvent evt){
@@ -305,6 +309,123 @@ public class gauge extends javax.swing.JFrame {
             Logger.getLogger(gauge.class.getName()).log(Level.SEVERE, null, ex);
         }
      }
+    
+    
+private int changeUp(int RPM) {
+    double temp;
+    double tempGear;
+    temp = (double)RPM;
+    tempGear = (double)currentGear;
+    temp = temp*(1 - Math.pow(.8,(tempGear+3)));
+    return (int)temp;
+}
+
+private int changeDown(int RPM) {
+    double temp;
+    double tempGear;
+    temp = (double)RPM;
+    tempGear = (double)currentGear;
+    temp = temp/(1 - Math.pow(.8,(tempGear+3)));
+    if (temp > 9100) {
+        //checkShiftLabel.setText("You blew your engine! Let the RPM drop more before downshifting");
+    }
+    return (int)temp;
+}
+private void isBoost(int x){
+    if (boost > 0){
+        //boostLabel.setText("Boost");
+    }
+}
+private void isVacuum(int x){
+    if (boost < 0){
+        //boostLabel.setText("Vacuum");
+    }
+}
+public int isBoostLimit(int x){
+    if (x > 20){
+        x=20;
+        //psiLabel.setText("25 PSI");
+    }
+    return x;
+}
+public int isBoostLimitNeg(int x){
+    if (x < -25){
+        x = -25;
+        //psiLabel.setText("-25 PSI");
+    }
+    return x;
+}
+public int isRevLimit(int x){
+    if (x > 9100) {
+        x = 9100;
+        //rpm.setText("9100 RPM");
+        goToSleep(50);
+    }
+    return x;
+}
+
+public double calcSpeed(int RPM, int gear)
+{
+    return RPM * gear * 0.0043021;
+}
+
+
+public int isVtec(int x){
+    if (x > 5000) {
+        //vtecdisplay.setText("VTEC!");
+        x += 100;
+    }
+    return x;
+}
+
+public void shiftTell(int x)
+{
+    if(!isEconomic)
+    {
+        if(x > 9000)
+        {
+            //Shift_ind.rpmGauge.setLedColor(LedColor.GREEN_LED);
+            //shiftTell.setText("Shift Up");
+        }
+        else{
+            //Shift_ind.rpmGauge.setLedColor(LedColor.RED_LED);
+            //shiftTell.setText("");
+        }
+    }
+    else
+    {
+        if(x > 2500)
+        {
+            //Shift_ind.rpmGauge.setLedColor(LedColor.GREEN_LED);
+            //shiftTell.setText("Shift Up");
+        }
+        else{
+            //Shift_ind.rpmGauge.setLedColor(LedColor.RED_LED);
+            //shiftTell.setText("");
+        }
+    }
+}
+
+
+private void checkShift(int x, boolean eco){
+    
+    if(x < 1800 && eco){
+        //checkShiftLabel.setText("Early shift.");
+    }
+    else if(x > 1800 && x < 2500 && eco){
+        //checkShiftLabel.setText("Good economic shift!");
+    }
+    else if (x > 2500 && eco){
+        //checkShiftLabel.setText("Late shift.");
+    }
+    if(x < 8500 && !eco){
+         //checkShiftLabel.setText("Early shift. (Too soon junior!)");
+    }
+    if(x > 8500 && x < 9200 && !eco){
+         //checkShiftLabel.setText("Good performance shift!");
+    }
+
+}
     
     
     
