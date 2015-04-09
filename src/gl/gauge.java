@@ -275,9 +275,6 @@ public class gauge extends javax.swing.JFrame {
             }
         });
 
-        
-        
-
         frame.pack();
         frame.setVisible(true);
        
