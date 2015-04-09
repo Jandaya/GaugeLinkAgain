@@ -56,10 +56,7 @@ public class gauge extends javax.swing.JFrame {
     ImageIcon flag = new ImageIcon("Flag mode.png");
     private boolean mouseDown = false;
     
-    
-    //Image stopImage = new Image(getClass().getResource("/gl/stop_button.png"));
-    //final static ImageIcon stopImage = new ImageIcon(getClass().getResource("/gl/stop_button.png"));
-    //startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
+
     public void createAndShowUI() {
         final JFrame frame = new JFrame("Dashboard");
         frame.setResizable(false);       
@@ -127,8 +124,7 @@ public class gauge extends javax.swing.JFrame {
         allGaugesPanel.setLayout(new BoxLayout(allGaugesPanel, BoxLayout.Y_AXIS));
         
         ButtonLook();
-        
-        //final Radial mphGauge = new Radial();
+
         mphGauge.setTitle("MPH");
         rpmGauge.setTitle("RPM");
         mphGauge.setUnitString("");
@@ -165,22 +161,7 @@ public class gauge extends javax.swing.JFrame {
         rpmGauge.setTrackSectionColor(Color.GREEN);
         rpmGauge.setTrackVisible(true);
         
-        //gauge4.setTickmarkSectionsVisible(false);
-        //gauge4.setGaugeType(GaugeType.TYPE1);
-        //gauge4.setFrameDesign(FrameDesign.GOLD);
-        //gauge4.setFrameType(FrameType.SQUARE);
-        
-        
-        /* Track codes
-        rpmGauge.setTrackStart(8000);
-        rpmGauge.setTrackStop(10000);
-        rpmGauge.setTrackSection(9000);
-        rpmGauge.setTrackSectionColor(Color.YELLOW);
-        rpmGauge.setTrackStopColor(Color.RED);
-        rpmGauge.setTrackVisible(true);
-        */
-        //gauge2.setTickmarkSections(sctns);
-        //gauge.setPointerColor(RED);
+
         startButtonPanel.setLayout(new BorderLayout());
         startButtonPanel.add(startButton, BorderLayout.CENTER);
         throttleButtonPanel.setLayout(new BorderLayout());
@@ -280,37 +261,67 @@ public class gauge extends javax.swing.JFrame {
         });
 
         frame.pack();
-        frame.setVisible(true);
-       
+        frame.setVisible(true);   
+    }
+
+public void ButtonLook() {                                            
+    startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
+    startButton.setBackground(Color.darkGray);
+            
+    throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
+    throttleButton.setBackground(Color.darkGray);        
+}
+public void goToSleep(int x){
+    try {
+        Thread.sleep(x);
+    } catch (InterruptedException ex) {
+        Logger.getLogger(gauge.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+private boolean isRunning = false;
+private synchronized boolean checkAndMark() {
+    if (isRunning) return false;
+    isRunning = true;
+    return true;
+}  
+private void startValues(){
+        x=800;
+        boost = -25;
+        //speed.setText("0 MPH");
+        //psiLabel.setText("-25 PSI");
+        //boostLabel.setText("Vacuum");
+        //rpm.setText("800 RPM");
+        //mode.setEnabled(true);
+        throttleButton.setEnabled(true);
+        //shiftUpButton.setEnabled(true);
+        //shiftDownButton.setEnabled(true);
+        startButton.setEnabled(true);
         
-    }
-    public static void UPD(double d){
-            //gauge.setValueAnimated(d);
-            rpmGauge.setValueAnimated(d);
-    }
-    public void ButtonLook() {                                            
-            startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
-            startButton.setBackground(Color.darkGray);
-            
-            throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
-            throttleButton.setBackground(Color.darkGray);        
-    }
-    public void mphIncrease() {
-            
-             
-    }
-    public boolean getButtonPressed(){
-        return buttonPressed;
-    }
-    public void goToSleep(int x){
-        try {
-            Thread.sleep(x);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(gauge.class.getName()).log(Level.SEVERE, null, ex);
+        if(isEconomic){
+            //ModePic.setIcon(leaf);
         }
-     }
-    
-    
+        else{
+            //ModePic.setIcon(flag);
+        isStart = true;
+        }
+}
+private void stopValues(){
+        x=0;
+        boost = 0;
+        //speed.setText("0 MPH");
+        //psiLabel.setText("0 PSI");
+        //boostLabel.setText("Vacuum");
+        //rpm.setText("0 RPM");
+        //mode.setEnabled(false);
+        throttleButton.setEnabled(false);
+        //shiftUpButton.setEnabled(false);
+        //shiftDownButton.setEnabled(false);
+        startButton.setEnabled(true);
+        
+        //ModePic.setIcon(new ImageIcon(""));
+        //isEconomic = true;
+        isStart = false;
+}   
 private int changeUp(int RPM) {
     double temp;
     double tempGear;
