@@ -41,6 +41,7 @@ public class gauge extends javax.swing.JFrame {
     final static DigitalRadial tempGauge = new DigitalRadial();
     final static JButton startButton = new JButton();
     final static JButton throttleButton = new JButton();
+    boolean isStarted = false;
     boolean mouseOnThrottle = false;
     //Image stopImage = new Image(getClass().getResource("/gl/stop_button.png"));
     //final static ImageIcon stopImage = new ImageIcon(getClass().getResource("/gl/stop_button.png"));
@@ -51,12 +52,8 @@ public class gauge extends javax.swing.JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setLocation(5, 510);
         frame.setLocationByPlatform(true);
-        //frame.setBackground();
-        //frame.setBackground(Color.black);
         
-        
-        
-        
+
 
         JPanel mphPanel = new JPanel() {
             @Override 
@@ -206,17 +203,36 @@ public class gauge extends javax.swing.JFrame {
         
         
         
-        startButton.addActionListener(new ActionListener(){
+        
+        
+        startButton.addMouseListener(new MouseListener(){
             @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    //g.throttleButtonMousePressed();
-                    //startButton.setText("Hello");
-                    
-                } catch(NumberFormatException ex) { 
-                    //TODO - handle invalid input 
-                    System.err.println("invalid input");
+            public void mouseExited(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseEntered(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseReleased(MouseEvent evt){
+                if (isStarted){
+                    startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
+                    isStarted = false;
                 }
+                else{
+                    startButton.setIcon(new ImageIcon(getClass().getResource("/gl/start_button.png.png")));
+                    isStarted = true;
+                }
+            }
+            @Override
+            public void mousePressed(MouseEvent evt){
+                startButton.setIcon(new ImageIcon(getClass().getResource("/gl/pressed_button.png")));
+                
+            }
+            @Override
+            public void mouseClicked(MouseEvent evt){
+                throttleButton.setBackground(Color.darkGray);
             }
         });
         
@@ -273,6 +289,7 @@ public class gauge extends javax.swing.JFrame {
                 
             
         }
+    
     
     
 }
