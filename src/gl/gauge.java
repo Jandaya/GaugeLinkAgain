@@ -30,6 +30,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
+import java.awt.event.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.*;
 
 
@@ -43,6 +46,8 @@ public class gauge extends javax.swing.JFrame {
     final static JButton throttleButton = new JButton();
     boolean isStarted = false;
     boolean mouseOnThrottle = false;
+    double mphNum = 0;
+    boolean buttonPressed = false;
     //Image stopImage = new Image(getClass().getResource("/gl/stop_button.png"));
     //final static ImageIcon stopImage = new ImageIcon(getClass().getResource("/gl/stop_button.png"));
     //startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
@@ -103,6 +108,7 @@ public class gauge extends javax.swing.JFrame {
                 return new Dimension(200, 200);
             }
         };
+        
         
         JPanel topRowPanel= new JPanel();
         JPanel secondRowPanel=new JPanel();
@@ -247,12 +253,20 @@ public class gauge extends javax.swing.JFrame {
             }
             @Override
             public void mouseReleased(MouseEvent evt){
+                buttonPressed = false;
                 throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
+                if (isStarted){
+                    mphGauge.setValue(0);
+                }
             }
             @Override
             public void mousePressed(MouseEvent evt){
+                buttonPressed = true;
                 throttleButton.setBackground(Color.darkGray);
                 throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalY.png")));
+                if (isStarted){
+                    mphIncrease();
+                }
                 
             }
             @Override
@@ -260,13 +274,7 @@ public class gauge extends javax.swing.JFrame {
                 throttleButton.setBackground(Color.darkGray);
             }
         });
-        
-        
-        
 
-        //buttonsPanel.add(valueLabel);
-        //buttonsPanel.add(valueField);
-        //buttonsPanel.add(button);
         
         
 
@@ -280,15 +288,27 @@ public class gauge extends javax.swing.JFrame {
             rpmGauge.setValueAnimated(d);
     }
     public void ButtonLook() {                                            
-        
             startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
             startButton.setBackground(Color.darkGray);
             
             throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
-            throttleButton.setBackground(Color.darkGray);
-                
+            throttleButton.setBackground(Color.darkGray);        
+    }
+    public void mphIncrease() {
             
+             
+    }
+    public boolean getButtonPressed(){
+        return buttonPressed;
+    }
+    public void goToSleep(int x){
+        try {
+            Thread.sleep(x);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(gauge.class.getName()).log(Level.SEVERE, null, ex);
         }
+     }
+    
     
     
     
