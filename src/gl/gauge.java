@@ -40,7 +40,7 @@ public class gauge extends javax.swing.JFrame {
     final static Radial mphGauge = new Radial();
     final static Radial rpmGauge = new Radial();
     final static Radial1Square fuelGauge = new Radial1Square();
-    final static LinearBargraph boostGauge = new LinearBargraph();
+    final static DigitalRadial boostGauge = new DigitalRadial();
     final static DigitalRadial tempGauge = new DigitalRadial();
     final static JButton startButton = new JButton();
     final static JButton throttleButton = new JButton();
@@ -80,7 +80,7 @@ public class gauge extends javax.swing.JFrame {
         JPanel boostPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
-                return new Dimension(100, 300);
+                return new Dimension(300, 300);
             }
         };
         JPanel fuelPanel = new JPanel() {
@@ -141,7 +141,9 @@ public class gauge extends javax.swing.JFrame {
         rpmGauge.setMinValue(0);
         rpmGauge.setMaxValue(10000);
         rpmGauge.setThreshold(8000);
-        boostGauge.setBarGraphColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
+        boostGauge.setMinValue(-20);
+        boostGauge.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
+        //boostGauge.setBarGraphColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
         boostGauge.setMinValue(-25);
         boostGauge.setMaxValue(40);
         mphGauge.setLedVisible(false);
@@ -181,11 +183,11 @@ public class gauge extends javax.swing.JFrame {
         tempPanel.setLayout(new BorderLayout());
         tempPanel.add(tempGauge, BorderLayout.CENTER);
         tempPanel.setBackground(Color.darkGray);
-        topRowPanel.add(fuelPanel);
+        //topRowPanel.add(fuelPanel);
         topRowPanel.add(mphPanel);
         topRowPanel.add(rpmPanel);
         topRowPanel.add(boostPanel);
-        topRowPanel.add(tempPanel);
+        //topRowPanel.add(tempPanel);
         //secondRowPanel.add(fuelPanel);
         //secondRowPanel.add(tempPanel);
         allGaugesPanel.add(topRowPanel);
@@ -537,11 +539,11 @@ public void shiftTell(int x)
     {
         if(x > 9000)
         {
-            //Shift_ind.rpmGauge.setLedColor(LedColor.GREEN_LED);
+            rpmGauge.setLedColor(LedColor.GREEN_LED);
             //shiftTell.setText("Shift Up");
         }
         else{
-            //Shift_ind.rpmGauge.setLedColor(LedColor.RED_LED);
+            rpmGauge.setLedColor(LedColor.RED_LED);
             //shiftTell.setText("");
         }
     }
@@ -549,11 +551,11 @@ public void shiftTell(int x)
     {
         if(x > 2500)
         {
-            //Shift_ind.rpmGauge.setLedColor(LedColor.GREEN_LED);
+            rpmGauge.setLedColor(LedColor.GREEN_LED);
             //shiftTell.setText("Shift Up");
         }
         else{
-            //Shift_ind.rpmGauge.setLedColor(LedColor.RED_LED);
+            rpmGauge.setLedColor(LedColor.RED_LED);
             //shiftTell.setText("");
         }
     }
