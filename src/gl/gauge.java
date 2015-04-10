@@ -44,6 +44,9 @@ public class gauge extends javax.swing.JFrame {
     final static DigitalRadial tempGauge = new DigitalRadial();
     final static JButton startButton = new JButton();
     final static JButton throttleButton = new JButton();
+    final static JButton shiftUpButton = new JButton();
+    final static JButton shiftDownButton = new JButton();
+    final static JButton modeButton = new JButton();
     boolean isStart = false;
     boolean isEconomic = true;
     boolean mouseOnThrottle = false;
@@ -113,13 +116,33 @@ public class gauge extends javax.swing.JFrame {
                 return new Dimension(200, 200);
             }
         };
+        JPanel shiftUpButtonPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(100, 100);
+            }
+        };
+        JPanel shiftDownButtonPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(100, 100);
+            }
+        };
+        JPanel modeButtonPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(100, 100);
+            }
+        };
         
         
         JPanel topRowPanel= new JPanel();
         JPanel secondRowPanel=new JPanel();
         JPanel allGaugesPanel=new JPanel();
+        JPanel shiftButtonPanel = new JPanel();
         topRowPanel.setLayout(new BoxLayout(topRowPanel, BoxLayout.X_AXIS));
         secondRowPanel.setLayout(new BoxLayout(secondRowPanel, BoxLayout.X_AXIS));
+        shiftButtonPanel.setLayout(new BoxLayout(shiftButtonPanel, BoxLayout.Y_AXIS));
         allButtonsPanel.setLayout(new BoxLayout(allButtonsPanel, BoxLayout.X_AXIS));
         allGaugesPanel.setLayout(new BoxLayout(allGaugesPanel, BoxLayout.Y_AXIS));
         
@@ -168,6 +191,15 @@ public class gauge extends javax.swing.JFrame {
         startButtonPanel.add(startButton, BorderLayout.CENTER);
         throttleButtonPanel.setLayout(new BorderLayout());
         throttleButtonPanel.add(throttleButton, BorderLayout.CENTER);
+        shiftUpButtonPanel.setLayout(new BorderLayout());
+        shiftUpButtonPanel.add(shiftUpButton, BorderLayout.CENTER);
+        shiftUpButtonPanel.setBackground(Color.darkGray);
+        shiftDownButtonPanel.setLayout(new BorderLayout());
+        shiftDownButtonPanel.add(shiftDownButton, BorderLayout.CENTER);
+        shiftDownButtonPanel.setBackground(Color.darkGray);
+        modeButtonPanel.setLayout(new BorderLayout());
+        modeButtonPanel.add(modeButton, BorderLayout.CENTER);
+        modeButtonPanel.setBackground(Color.darkGray);
         mphPanel.setLayout(new BorderLayout());
         mphPanel.add(mphGauge, BorderLayout.CENTER);
         rpmPanel.setLayout(new BorderLayout());
@@ -187,6 +219,8 @@ public class gauge extends javax.swing.JFrame {
         topRowPanel.add(mphPanel);
         topRowPanel.add(rpmPanel);
         topRowPanel.add(boostPanel);
+        shiftButtonPanel.add(shiftUpButtonPanel);
+        shiftButtonPanel.add(shiftDownButtonPanel);
         //topRowPanel.add(tempPanel);
         //secondRowPanel.add(fuelPanel);
         //secondRowPanel.add(tempPanel);
@@ -194,6 +228,8 @@ public class gauge extends javax.swing.JFrame {
         //allGaugesPanel.add(secondRowPanel);
         allButtonsPanel.add(startButtonPanel);
         allButtonsPanel.add(throttleButtonPanel);
+        allButtonsPanel.add(shiftButtonPanel);
+        allButtonsPanel.add(modeButtonPanel);
         allGaugesPanel.add(allButtonsPanel);
         frame.add(allGaugesPanel);
 
@@ -264,6 +300,73 @@ public class gauge extends javax.swing.JFrame {
                 throttleButton.setBackground(Color.darkGray);
             }
         });
+        
+        shiftUpButton.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseExited(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseEntered(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseReleased(MouseEvent evt){
+
+            }
+            @Override
+            public void mousePressed(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseClicked(MouseEvent evt){
+                if(isStart){
+                    checkShift(x,isEconomic);
+                    if (currentGear <= 5){
+                        //x-=1000;
+                        x = changeUp(x);
+                        currentGear+=1;
+                        gearIncrease=Integer.toString(currentGear);
+                        shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearIncrease);
+                        shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearIncrease);
+                        //gearNumber.setText(gearIncrease);
+                    }
+                }
+            }
+        });
+        shiftDownButton.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseExited(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseEntered(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseReleased(MouseEvent evt){
+
+            }
+            @Override
+            public void mousePressed(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseClicked(MouseEvent evt){
+                if(isStart){
+                    checkShift(x,isEconomic);
+                    if (currentGear <= 5){
+                        //x-=1000;
+                        x = changeUp(x);
+                        currentGear+=1;
+                        gearIncrease=Integer.toString(currentGear);
+                        shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearIncrease);
+                        shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearIncrease);
+                        //gearNumber.setText(gearIncrease);
+                    }
+                }
+            }
+        });
 
         frame.pack();
         frame.setVisible(true);   
@@ -274,7 +377,16 @@ public void ButtonLook() {
     startButton.setBackground(Color.darkGray);
             
     throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
-    throttleButton.setBackground(Color.darkGray);        
+    throttleButton.setBackground(Color.darkGray); 
+    
+    modeButton.setIcon(new ImageIcon(getClass().getResource("/gl/Flag mode.png")));
+    modeButton.setBackground(Color.darkGray);
+    
+    shiftUpButton.setText("SHIFT UP BUTTON: gear 0");
+    shiftUpButton.setBackground(Color.darkGray);
+    
+    shiftDownButton.setText("SHIFT DOWN BUTTON: gear 0");
+    shiftDownButton.setBackground(Color.darkGray);
 }
 public void goToSleep(int x){
     try {
@@ -428,6 +540,9 @@ private void startValues(){
         rpmGauge.setValue(x);
         mphGauge.setValue(0);
         boostGauge.setValue(boost);
+        currentGear = 1;
+        shiftUpButton.setText("SHIFT UP BUTTON: gear 1");
+        shiftDownButton.setText("SHIFT DOWN BUTTON: gear 1");
         //speed.setText("0 MPH");
         //psiLabel.setText("-25 PSI");
         //boostLabel.setText("Vacuum");
@@ -452,6 +567,9 @@ private void stopValues(){
         rpmGauge.setValue(x);
         mphGauge.setValue(0);
         boostGauge.setValue(boost);
+        currentGear = 0;
+        shiftUpButton.setText("SHIFT UP BUTTON: gear 0");
+        shiftDownButton.setText("SHIFT DOWN BUTTON: gear 0");
         //speed.setText("0 MPH");
         //psiLabel.setText("0 PSI");
         //boostLabel.setText("Vacuum");
