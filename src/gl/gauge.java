@@ -463,7 +463,7 @@ private void initThread() {
             public void run() {
                 do {
                     //sleeps the system, so that we dont build the values too fast
-                    goToSleep(30);
+                    goToSleep(50);
                     
                     // checks to display vtec
                     x = isVtec(x);
