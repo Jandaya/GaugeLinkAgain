@@ -354,15 +354,45 @@ public class gauge extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent evt){
                 if(isStart){
-                    checkShift(x,isEconomic);
-                    if (currentGear <= 5){
+                    if (currentGear >= 2){
                         //x-=1000;
-                        x = changeUp(x);
-                        currentGear+=1;
-                        gearIncrease=Integer.toString(currentGear);
-                        shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearIncrease);
-                        shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearIncrease);
+                        currentGear-=1;
+                        gearDecrease=Integer.toString(currentGear);
+                        shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearDecrease);
+                        shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearDecrease);
                         //gearNumber.setText(gearIncrease);
+                    }
+                }
+            }
+        });
+        
+        modeButton.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseExited(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseEntered(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseReleased(MouseEvent evt){
+
+            }
+            @Override
+            public void mousePressed(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseClicked(MouseEvent evt){
+                if(isStart){
+                    if (isEconomic == true){
+                        modeButton.setIcon(new ImageIcon(getClass().getResource("/gl/Flag mode.png")));
+                        isEconomic = false;
+                    }
+                    else{
+                        modeButton.setIcon(new ImageIcon(getClass().getResource("/gl/leafMode.png")));
+                        isEconomic = true;
                     }
                 }
             }
@@ -371,6 +401,7 @@ public class gauge extends javax.swing.JFrame {
         frame.pack();
         frame.setVisible(true);   
     }
+    
 
 public void ButtonLook() {                                            
     startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
