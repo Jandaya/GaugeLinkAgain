@@ -47,17 +47,18 @@ public class gauge extends javax.swing.JFrame {
     final static JButton shiftUpButton = new JButton();
     final static JButton shiftDownButton = new JButton();
     final static JButton modeButton = new JButton();
+    final static JLabel shiftFeedback = new JLabel();
     boolean isStart = false;
-    boolean isEconomic = true;
+    boolean isEconomic = false;
     boolean mouseOnThrottle = false;
     double speedNum = 0;
     int x = 0;
     int boost = 0, currentGear = 1;
     String gearIncrease, gearDecrease, speedIncrease, speedDecrease, rpmIncrease, rpmDecrease, boostIncrease, boostDecrease;
     boolean buttonPressed = false;
-    ImageIcon leaf = new ImageIcon("leafMode.png");
-    ImageIcon flag = new ImageIcon("Flag mode.png");
     private boolean mouseDown = false;
+    
+    
     
 
     public void createAndShowUI() {
@@ -134,6 +135,13 @@ public class gauge extends javax.swing.JFrame {
                 return new Dimension(100, 100);
             }
         };
+        JPanel shiftFeedbackPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(50, 50);
+            }
+        };
+        
         
         
         JPanel topRowPanel= new JPanel();
@@ -200,6 +208,8 @@ public class gauge extends javax.swing.JFrame {
         modeButtonPanel.setLayout(new BorderLayout());
         modeButtonPanel.add(modeButton, BorderLayout.CENTER);
         modeButtonPanel.setBackground(Color.darkGray);
+        shiftFeedbackPanel.setLayout(new BorderLayout());
+        shiftFeedbackPanel.add(shiftFeedback, BorderLayout.CENTER);
         mphPanel.setLayout(new BorderLayout());
         mphPanel.add(mphGauge, BorderLayout.CENTER);
         rpmPanel.setLayout(new BorderLayout());
@@ -212,6 +222,7 @@ public class gauge extends javax.swing.JFrame {
         rpmPanel.setBackground(Color.darkGray);
         boostPanel.setBackground(Color.darkGray);
         fuelPanel.setBackground(Color.darkGray);
+        shiftFeedbackPanel.setBackground(Color.darkGray);
         tempPanel.setLayout(new BorderLayout());
         tempPanel.add(tempGauge, BorderLayout.CENTER);
         tempPanel.setBackground(Color.darkGray);
@@ -224,6 +235,7 @@ public class gauge extends javax.swing.JFrame {
         //topRowPanel.add(tempPanel);
         //secondRowPanel.add(fuelPanel);
         //secondRowPanel.add(tempPanel);
+        allGaugesPanel.add(shiftFeedbackPanel);
         allGaugesPanel.add(topRowPanel);
         //allGaugesPanel.add(secondRowPanel);
         allButtonsPanel.add(startButtonPanel);
@@ -415,9 +427,18 @@ public void ButtonLook() {
     
     shiftUpButton.setText("SHIFT UP BUTTON: gear 0");
     shiftUpButton.setBackground(Color.darkGray);
+    shiftUpButton.setForeground(Color.cyan);
     
     shiftDownButton.setText("SHIFT DOWN BUTTON: gear 0");
     shiftDownButton.setBackground(Color.darkGray);
+    shiftDownButton.setForeground(Color.cyan);
+    
+    shiftFeedback.setBackground(Color.darkGray);
+    shiftFeedback.setForeground(Color.WHITE);
+    shiftFeedback.setFont(new Font("Courier", Font.BOLD, 30));
+    shiftFeedback.setHorizontalTextPosition(JLabel.CENTER);
+    shiftFeedback.setVerticalTextPosition(JLabel.CENTER);
+    shiftFeedback.setText("Shift Feedback: (try shifting!)");
 }
 public void goToSleep(int x){
     try {
@@ -715,18 +736,28 @@ private void checkShift(int x, boolean eco){
     
     if(x < 1800 && eco){
         //checkShiftLabel.setText("Early shift.");
+        shiftFeedback.setForeground(Color.red);
+        shiftFeedback.setText("Shift Feedback: Early shift!");
     }
     else if(x > 1800 && x < 2500 && eco){
         //checkShiftLabel.setText("Good economic shift!");
+        shiftFeedback.setForeground(Color.green);
+        shiftFeedback.setText("Shift Feedback: Good economic shift!");
     }
     else if (x > 2500 && eco){
         //checkShiftLabel.setText("Late shift.");
+        shiftFeedback.setForeground(Color.red);
+        shiftFeedback.setText("Shift Feedback: Late shift!");
     }
     if(x < 8500 && !eco){
          //checkShiftLabel.setText("Early shift. (Too soon junior!)");
+        shiftFeedback.setForeground(Color.red);
+        shiftFeedback.setText("Shift Feedback: Early shift (too soon junior)!");
     }
     if(x > 8500 && x < 9200 && !eco){
          //checkShiftLabel.setText("Good performance shift!");
+        shiftFeedback.setForeground(Color.green);
+        shiftFeedback.setText("Shift Feedback: Good performance shift!");
     }
 
 }
