@@ -422,25 +422,30 @@ public void ButtonLook() {
     startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
     //startButton.setBackground(Color.darkGray);
     startButton.setContentAreaFilled(false);
+    startButton.setFocusPainted(false);
             
     throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
     //throttleButton.setBackground(Color.darkGray); 
     throttleButton.setContentAreaFilled(false);
     //throttleButton.setOpaque(false);
+    throttleButton.setFocusPainted(false);
     
     modeButton.setIcon(new ImageIcon(getClass().getResource("/gl/Flag mode.png")));
     modeButton.setContentAreaFilled(false);
     //modeButton.setBackground(Color.darkGray);
+    modeButton.setFocusPainted(false);
     
     shiftUpButton.setText("SHIFT UP BUTTON: gear 0");
     //shiftUpButton.setBackground(Color.darkGray);
     shiftUpButton.setContentAreaFilled(false);
     shiftUpButton.setForeground(Color.cyan);
+    shiftUpButton.setFocusPainted(false);
     
     shiftDownButton.setText("SHIFT DOWN BUTTON: gear 0");
     //shiftDownButton.setBackground(Color.darkGray);
     shiftDownButton.setContentAreaFilled(false);
     shiftDownButton.setForeground(Color.cyan);
+    shiftDownButton.setFocusPainted(false);
     
     shiftFeedback.setBackground(Color.darkGray);
     shiftFeedback.setForeground(Color.WHITE);
