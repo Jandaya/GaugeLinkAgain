@@ -152,6 +152,7 @@ public class gauge extends javax.swing.JFrame {
         secondRowPanel.setLayout(new BoxLayout(secondRowPanel, BoxLayout.X_AXIS));
         shiftButtonPanel.setLayout(new BoxLayout(shiftButtonPanel, BoxLayout.Y_AXIS));
         allButtonsPanel.setLayout(new BoxLayout(allButtonsPanel, BoxLayout.X_AXIS));
+        //allButtonsPanel.setBackground(Color.darkGray);
         allGaugesPanel.setLayout(new BoxLayout(allGaugesPanel, BoxLayout.Y_AXIS));
         
         ButtonLook();
@@ -197,8 +198,10 @@ public class gauge extends javax.swing.JFrame {
 
         startButtonPanel.setLayout(new BorderLayout());
         startButtonPanel.add(startButton, BorderLayout.CENTER);
+        startButtonPanel.setBackground(Color.darkGray);
         throttleButtonPanel.setLayout(new BorderLayout());
         throttleButtonPanel.add(throttleButton, BorderLayout.CENTER);
+        throttleButtonPanel.setBackground(Color.darkGray);
         shiftUpButtonPanel.setLayout(new BorderLayout());
         shiftUpButtonPanel.add(shiftUpButton, BorderLayout.CENTER);
         shiftUpButtonPanel.setBackground(Color.darkGray);
@@ -417,20 +420,26 @@ public class gauge extends javax.swing.JFrame {
 
 public void ButtonLook() {                                            
     startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
-    startButton.setBackground(Color.darkGray);
+    //startButton.setBackground(Color.darkGray);
+    startButton.setContentAreaFilled(false);
             
     throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
-    throttleButton.setBackground(Color.darkGray); 
+    //throttleButton.setBackground(Color.darkGray); 
+    throttleButton.setContentAreaFilled(false);
+    //throttleButton.setOpaque(false);
     
     modeButton.setIcon(new ImageIcon(getClass().getResource("/gl/Flag mode.png")));
-    modeButton.setBackground(Color.darkGray);
+    modeButton.setContentAreaFilled(false);
+    //modeButton.setBackground(Color.darkGray);
     
     shiftUpButton.setText("SHIFT UP BUTTON: gear 0");
-    shiftUpButton.setBackground(Color.darkGray);
+    //shiftUpButton.setBackground(Color.darkGray);
+    shiftUpButton.setContentAreaFilled(false);
     shiftUpButton.setForeground(Color.cyan);
     
     shiftDownButton.setText("SHIFT DOWN BUTTON: gear 0");
-    shiftDownButton.setBackground(Color.darkGray);
+    //shiftDownButton.setBackground(Color.darkGray);
+    shiftDownButton.setContentAreaFilled(false);
     shiftDownButton.setForeground(Color.cyan);
     
     shiftFeedback.setBackground(Color.darkGray);
