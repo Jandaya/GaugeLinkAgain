@@ -39,9 +39,10 @@ import javax.imageio.*;
 public class gauge extends javax.swing.JFrame {
     final static Radial mphGauge = new Radial();
     final static Radial rpmGauge = new Radial();
-    final static Radial1Square fuelGauge = new Radial1Square();
     final static DigitalRadial boostGauge = new DigitalRadial();
     final static DigitalRadial tempGauge = new DigitalRadial();
+    final static DisplaySingle distanceGauge = new DisplaySingle();
+    final static DisplaySingle fuelGauge = new DisplaySingle();
     final static JButton startButton = new JButton();
     final static JButton throttleButton = new JButton();
     final static JButton shiftUpButton = new JButton();
@@ -87,12 +88,6 @@ public class gauge extends javax.swing.JFrame {
                 return new Dimension(300, 300);
             }
         };
-        JPanel fuelPanel = new JPanel() {
-            @Override 
-            public Dimension getPreferredSize() {
-                return new Dimension(100, 100);
-            }
-        };
         JPanel tempPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
@@ -126,7 +121,7 @@ public class gauge extends javax.swing.JFrame {
         JPanel shiftDownButtonPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
-                return new Dimension(100, 100);
+                return new Dimension(100, 0);
             }
         };
         JPanel modeButtonPanel = new JPanel() {
@@ -141,22 +136,44 @@ public class gauge extends javax.swing.JFrame {
                 return new Dimension(50, 50);
             }
         };
+        JPanel fuelPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(300, 100);
+            }
+        };
+        JPanel distancePanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(300, 100);
+            }
+        };
+        JPanel bufferPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(300, 400);
+            }
+        };
         
         
-        
+        JPanel numGaugesPanel = new JPanel();
         JPanel topRowPanel= new JPanel();
         JPanel secondRowPanel=new JPanel();
-        JPanel allGaugesPanel=new JPanel();
+        JPanel leftSidePanel=new JPanel();
+        JPanel rightSidePanel = new JPanel();
         JPanel shiftButtonPanel = new JPanel();
         topRowPanel.setLayout(new BoxLayout(topRowPanel, BoxLayout.X_AXIS));
         secondRowPanel.setLayout(new BoxLayout(secondRowPanel, BoxLayout.X_AXIS));
         shiftButtonPanel.setLayout(new BoxLayout(shiftButtonPanel, BoxLayout.Y_AXIS));
         allButtonsPanel.setLayout(new BoxLayout(allButtonsPanel, BoxLayout.X_AXIS));
+        numGaugesPanel.setLayout(new BoxLayout(numGaugesPanel, BoxLayout.Y_AXIS));
         //allButtonsPanel.setBackground(Color.darkGray);
-        allGaugesPanel.setLayout(new BoxLayout(allGaugesPanel, BoxLayout.Y_AXIS));
+        leftSidePanel.setLayout(new BoxLayout(leftSidePanel, BoxLayout.Y_AXIS));
+        rightSidePanel.setLayout(new BoxLayout(rightSidePanel, BoxLayout.X_AXIS));
+        
         
         ButtonLook();
-
+        
         mphGauge.setTitle("MPH");
         rpmGauge.setTitle("RPM");
         mphGauge.setUnitString("");
@@ -179,13 +196,6 @@ public class gauge extends javax.swing.JFrame {
         boostGauge.setMinValue(-25);
         boostGauge.setMaxValue(40);
         mphGauge.setLedVisible(false);
-        fuelGauge.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
-        fuelGauge.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
-        fuelGauge.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
-        fuelGauge.setTitle("Fuel");
-        fuelGauge.setUnitString("Liters");
-        fuelGauge.setValue(60);
-        fuelGauge.setLedVisible(false);
         tempGauge.setLcdVisible(false);
         tempGauge.setTitle("Temperature");
         tempGauge.setUnitString("T");
@@ -194,11 +204,22 @@ public class gauge extends javax.swing.JFrame {
         rpmGauge.setTrackStop(10000);
         rpmGauge.setTrackSectionColor(Color.GREEN);
         rpmGauge.setTrackVisible(true);
+        fuelGauge.setLcdUnitString("mpg");
+        distanceGauge.setLcdUnitString("miles");
+        
         
 
         startButtonPanel.setLayout(new BorderLayout());
         startButtonPanel.add(startButton, BorderLayout.CENTER);
         startButtonPanel.setBackground(Color.darkGray);
+        fuelPanel.setLayout(new BorderLayout());
+        fuelPanel.add(fuelGauge, BorderLayout.CENTER);
+        fuelPanel.setBackground(Color.darkGray);
+        bufferPanel.setLayout(new BorderLayout());
+        bufferPanel.setBackground(Color.darkGray);
+        distancePanel.setLayout(new BorderLayout());
+        distancePanel.add(distanceGauge, BorderLayout.CENTER);
+        distancePanel.setBackground(Color.darkGray);
         throttleButtonPanel.setLayout(new BorderLayout());
         throttleButtonPanel.add(throttleButton, BorderLayout.CENTER);
         throttleButtonPanel.setBackground(Color.darkGray);
@@ -229,24 +250,29 @@ public class gauge extends javax.swing.JFrame {
         tempPanel.setLayout(new BorderLayout());
         tempPanel.add(tempGauge, BorderLayout.CENTER);
         tempPanel.setBackground(Color.darkGray);
+        shiftUpButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
+        
         //topRowPanel.add(fuelPanel);
+        numGaugesPanel.add(fuelPanel);
+        numGaugesPanel.add(distancePanel);
+        numGaugesPanel.add(bufferPanel);
         topRowPanel.add(mphPanel);
         topRowPanel.add(rpmPanel);
         topRowPanel.add(boostPanel);
+        //topRowPanel.add(numGaugesPanel);
         shiftButtonPanel.add(shiftUpButtonPanel);
-        shiftButtonPanel.add(shiftDownButtonPanel);
-        //topRowPanel.add(tempPanel);
-        //secondRowPanel.add(fuelPanel);
-        //secondRowPanel.add(tempPanel);
-        allGaugesPanel.add(shiftFeedbackPanel);
-        allGaugesPanel.add(topRowPanel);
+        //shiftButtonPanel.add(shiftDownButtonPanel);
+        leftSidePanel.add(shiftFeedbackPanel);
+        leftSidePanel.add(topRowPanel);
         //allGaugesPanel.add(secondRowPanel);
         allButtonsPanel.add(startButtonPanel);
         allButtonsPanel.add(throttleButtonPanel);
         allButtonsPanel.add(shiftButtonPanel);
         allButtonsPanel.add(modeButtonPanel);
-        allGaugesPanel.add(allButtonsPanel);
-        frame.add(allGaugesPanel);
+        leftSidePanel.add(allButtonsPanel);
+        rightSidePanel.add(leftSidePanel);
+        rightSidePanel.add(numGaugesPanel);
+        frame.add(rightSidePanel);
 
         
         
@@ -316,7 +342,7 @@ public class gauge extends javax.swing.JFrame {
                         x = changeUp(x);
                         currentGear+=1;
                         gearIncrease=Integer.toString(currentGear);
-                        shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearIncrease);
+                        //shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearIncrease);
                         shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearIncrease);
                        // gearNumber.setText(gearIncrease);
                     }
@@ -329,7 +355,7 @@ public class gauge extends javax.swing.JFrame {
                         currentGear-=1;
                         gearDecrease=Integer.toString(currentGear);
                         shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearDecrease);
-                        shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearDecrease);
+                        //shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearDecrease);
                         //gearNumber.setText(gearDecrease);
                     }
                 }
@@ -410,7 +436,7 @@ public class gauge extends javax.swing.JFrame {
                         x = changeUp(x);
                         currentGear+=1;
                         gearIncrease=Integer.toString(currentGear);
-                        shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearIncrease);
+                        //shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearIncrease);
                         shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearIncrease);
                         //gearNumber.setText(gearIncrease);
                     }
@@ -457,7 +483,7 @@ public class gauge extends javax.swing.JFrame {
                         //x-=1000;
                         currentGear-=1;
                         gearDecrease=Integer.toString(currentGear);
-                        shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearDecrease);
+                        //shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearDecrease);
                         shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearDecrease);
                         //gearNumber.setText(gearIncrease);
                     }
@@ -519,7 +545,7 @@ public void ButtonLook() {
     //modeButton.setBackground(Color.darkGray);
     modeButton.setFocusPainted(false);
     
-    shiftUpButton.setText("SHIFT UP BUTTON: gear 0");
+    //shiftUpButton.setText("SHIFT UP BUTTON: gear 0");
     //shiftUpButton.setBackground(Color.darkGray);
     shiftUpButton.setContentAreaFilled(false);
     shiftUpButton.setForeground(Color.cyan);
@@ -691,7 +717,7 @@ private void startValues(){
         mphGauge.setValue(0);
         boostGauge.setValue(boost);
         currentGear = 1;
-        shiftUpButton.setText("SHIFT UP BUTTON: gear 1");
+        //shiftUpButton.setText("SHIFT UP BUTTON: gear 1");
         shiftDownButton.setText("SHIFT DOWN BUTTON: gear 1");
         //speed.setText("0 MPH");
         //psiLabel.setText("-25 PSI");
@@ -718,7 +744,7 @@ private void stopValues(){
         mphGauge.setValue(0);
         boostGauge.setValue(boost);
         currentGear = 0;
-        shiftUpButton.setText("SHIFT UP BUTTON: gear 0");
+        //shiftUpButton.setText("SHIFT UP BUTTON: gear 0");
         shiftDownButton.setText("SHIFT DOWN BUTTON: gear 0");
         //speed.setText("0 MPH");
         //psiLabel.setText("0 PSI");
