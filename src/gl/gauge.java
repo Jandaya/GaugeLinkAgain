@@ -724,14 +724,6 @@ private void startValues(){
         changeGearImage();
         //shiftUpButton.setText("SHIFT UP BUTTON: gear 1");
         shiftDownButton.setText("SHIFT DOWN BUTTON: gear 1");
-        //speed.setText("0 MPH");
-        //psiLabel.setText("-25 PSI");
-        //boostLabel.setText("Vacuum");
-        //rpm.setText("800 RPM");
-        //mode.setEnabled(true);
-        //throttleButton.setEnabled(true);
-        //shiftUpButton.setEnabled(true);
-        //shiftDownButton.setEnabled(true);
         startButton.setEnabled(true);
         
         if(isEconomic){
