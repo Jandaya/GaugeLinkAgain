@@ -25,8 +25,6 @@ public class gaugeForm extends javax.swing.JFrame {
     
     // x is RPM, will change in the future.
     int x = 0;
-    int fuelUsed = 0;
-    double distCovered = 0;
     double speedNum = 0;
     int boost = 0, currentGear = 1;
     String gearIncrease, gearDecrease, speedIncrease, speedDecrease, rpmIncrease, rpmDecrease, boostIncrease, boostDecrease;
@@ -587,9 +585,7 @@ private void initThread() {
                         } 
                         
                         // calculate fuel used and distance covered
-                        calcFuel();
-                        calcDist();
-                        
+                                                
                         
                         // check if race is done
                         
@@ -777,19 +773,7 @@ private void checkShift(int x, boolean eco){
 
 }
 
-public void calcFuel() {
-    fuelUsed += (x/(currentGear*200));    
-}
 
-public void calcDist() {
-    distCovered += (speedNum/3600);    
-}
-
-public void isRaceDone() {
-    if (distCovered >= .25) {
-        //race done, you used 'fuelUsed' units of fuel
-    }
-}
     
 private void increment(int x){
     
