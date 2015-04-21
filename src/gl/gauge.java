@@ -286,6 +286,59 @@ public class gauge extends javax.swing.JFrame {
             }
         });
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        throttleButton.addKeyListener(new KeyListener(){
+            @Override
+            public void keyReleased(KeyEvent evt){
+                mouseDown = false;
+                throttleButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
+            }
+            @Override
+            public void keyPressed(KeyEvent evt){
+                if(evt.getKeyCode() == KeyEvent.VK_SHIFT){
+                    mouseDown = true;
+                    throttleButton.setIcon(new ImageIcon("pedalY.png"));
+                    initThread();
+                }
+                if(evt.getKeyCode() == KeyEvent.VK_A){
+                    checkShift(x,isEconomic);
+                    if (currentGear <= 5){
+                       // x-=1000;
+                        x = changeUp(x);
+                        currentGear+=1;
+                        gearIncrease=Integer.toString(currentGear);
+                        shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearIncrease);
+                        shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearIncrease);
+                       // gearNumber.setText(gearIncrease);
+                    }
+                }
+
+                if(evt.getKeyCode() == KeyEvent.VK_Z){   
+                    if (currentGear >= 2){
+                        //x+=1000;
+                        x = changeDown(x);
+                        currentGear-=1;
+                        gearDecrease=Integer.toString(currentGear);
+                        shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearDecrease);
+                        shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearDecrease);
+                        //gearNumber.setText(gearDecrease);
+                    }
+                }
+            }
+            @Override
+            public void keyTyped(KeyEvent evt){
+                
+            }
+        });
         throttleButton.addMouseListener(new MouseListener(){
             @Override
             public void mouseExited(MouseEvent evt){
@@ -313,6 +366,21 @@ public class gauge extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent evt){
                 throttleButton.setBackground(Color.darkGray);
+            }
+        });
+        
+        shiftUpButton.addKeyListener(new KeyListener(){
+            @Override
+            public void keyReleased(KeyEvent evt){
+                
+            }
+            @Override
+            public void keyPressed(KeyEvent evt){
+                
+            }
+            @Override
+            public void keyTyped(KeyEvent evt){
+                
             }
         });
         
@@ -349,6 +417,22 @@ public class gauge extends javax.swing.JFrame {
                 }
             }
         });
+        
+        shiftDownButton.addKeyListener(new KeyListener(){
+            @Override
+            public void keyReleased(KeyEvent evt){
+                
+            }
+            @Override
+            public void keyPressed(KeyEvent evt){
+             
+            }
+            @Override
+            public void keyTyped(KeyEvent evt){
+                
+            }
+        });
+        
         shiftDownButton.addMouseListener(new MouseListener(){
             @Override
             public void mouseExited(MouseEvent evt){
@@ -650,6 +734,34 @@ private void stopValues(){
         //isEconomic = true;
         isStart = false;
 }   
+
+public void keyPressed(KeyEvent e){
+    if(e.getKeyCode() == KeyEvent.VK_A){
+        checkShift(x,isEconomic);
+            if (currentGear <= 5){
+               // x-=1000;
+                x = changeUp(x);
+                currentGear+=1;
+                gearIncrease=Integer.toString(currentGear);
+                //gearNumber.setText(gearIncrease);
+            }
+        }
+        
+        if(e.getKeyCode() == KeyEvent.VK_Z){   
+            if (currentGear >= 2){
+                //x+=1000;
+                x = changeDown(x);
+                currentGear-=1;
+                gearDecrease=Integer.toString(currentGear);
+                //gearNumber.setText(gearDecrease);
+            }
+        }
+        if(e.getKeyCode() == KeyEvent.VK_SHIFT){
+            mouseDown = true;
+            throttleButton.setIcon(new ImageIcon("pedalY.png"));
+            initThread();
+        }
+}
 private int changeUp(int RPM) {
     double temp;
     double tempGear;
@@ -666,7 +778,9 @@ private int changeDown(int RPM) {
     tempGear = (double)currentGear;
     temp = temp/(1 - Math.pow(.8,(tempGear+3)));
     if (temp > 9100) {
-        //checkShiftLabel.setText("You blew your engine! Let the RPM drop more before downshifting");
+        shiftFeedback.setForeground(Color.red);
+        shiftFeedback.setFont(new Font("Courier", Font.BOLD, 24));
+        shiftFeedback.setText("You blew your engine! Let the RPM drop more before downshifting");
     }
     return (int)temp;
 }
