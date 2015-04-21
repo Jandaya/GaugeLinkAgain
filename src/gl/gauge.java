@@ -252,7 +252,7 @@ public class gauge extends javax.swing.JFrame {
         tempPanel.setLayout(new BorderLayout());
         tempPanel.add(tempGauge, BorderLayout.CENTER);
         tempPanel.setBackground(Color.darkGray);
-        shiftUpButton.setIcon(new ImageIcon(getClass().getResource("/gl/pedalN.png")));
+        shiftUpButton.setIcon(new ImageIcon(getClass().getResource("Neutral.png")));
         
         //topRowPanel.add(fuelPanel);
         numGaugesPanel.add(fuelPanel);
@@ -347,6 +347,7 @@ public class gauge extends javax.swing.JFrame {
                         //shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearIncrease);
                         shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearIncrease);
                        // gearNumber.setText(gearIncrease);
+                        changeGearImage();
                     }
                 }
 
@@ -359,6 +360,7 @@ public class gauge extends javax.swing.JFrame {
                         shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearDecrease);
                         //shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearDecrease);
                         //gearNumber.setText(gearDecrease);
+                        changeGearImage();
                     }
                 }
             }
@@ -719,6 +721,7 @@ private void startValues(){
         mphGauge.setValue(0);
         boostGauge.setValue(boost);
         currentGear = 1;
+        changeGearImage();
         //shiftUpButton.setText("SHIFT UP BUTTON: gear 1");
         shiftDownButton.setText("SHIFT DOWN BUTTON: gear 1");
         //speed.setText("0 MPH");
@@ -873,6 +876,10 @@ public boolean isRaceDone() {
         return true;
     }
     return false;
+}
+
+public void changeGearImage() {
+    shiftUpButton.setIcon(new ImageIcon(getClass().getResource(Integer.toString(currentGear)+".png")));
 }
 
 public void shiftTell(int x)
