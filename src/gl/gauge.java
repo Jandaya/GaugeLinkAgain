@@ -865,7 +865,7 @@ public void shiftTell(int x)
     }
     else
     {
-        if(x > 2500)
+        if(x > 1800 && x < 2500)
         {
             rpmGauge.setLedColor(LedColor.GREEN_LED);
             //shiftTell.setText("Shift Up");
