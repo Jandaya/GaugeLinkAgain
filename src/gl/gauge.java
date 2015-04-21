@@ -54,6 +54,8 @@ public class gauge extends javax.swing.JFrame {
     double speedNum = 0;
     int x = 0;
     int boost = 0, currentGear = 1;
+    int fuelUsed = 0;
+    double distCovered = 0;
     String gearIncrease, gearDecrease, speedIncrease, speedDecrease, rpmIncrease, rpmDecrease, boostIncrease, boostDecrease;
     boolean buttonPressed = false;
     private boolean mouseDown = false;
@@ -829,6 +831,22 @@ public int isVtec(int x){
         x += 100;
     }
     return x;
+}
+
+public void calcFuel() {
+    fuelUsed += (x/(currentGear*200));    
+}
+
+public void calcDist() {
+    distCovered += (speedNum/3600);    
+}
+
+public boolean isRaceDone() {
+    if (distCovered >= .25) {
+        //race done, you used 'fuelUsed' units of fuel
+        return true;
+    }
+    return false;
 }
 
 public void shiftTell(int x)
