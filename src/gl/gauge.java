@@ -51,6 +51,7 @@ public class gauge extends javax.swing.JFrame {
     final static JLabel shiftFeedback = new JLabel();
     final static JButton resetButton = new JButton();
     final static JButton helpButton = new JButton();
+    final static JButton dragButton = new JButton();
     boolean isStart = false;
     boolean isEconomic = false;
     boolean mouseOnThrottle = false;
@@ -170,7 +171,12 @@ public class gauge extends javax.swing.JFrame {
                 return new Dimension(300, 80);
             }
         };
-        
+        JPanel dragPanel = new JPanel() {
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(80,100);
+            }
+        };
         
         
         JPanel numGaugesPanel = new JPanel();
@@ -282,6 +288,9 @@ public class gauge extends javax.swing.JFrame {
         helpButton.setForeground(Color.yellow);
         helpButton.setFont(new Font("Arial", Font.BOLD, 20));
         helpButton.setText("NEED HELP? CLICK HERE");
+        dragPanel.setLayout(new BorderLayout());
+        dragPanel.add(dragButton, BorderLayout.CENTER);
+        dragPanel.setBackground(Color.darkGray);
         
         //topRowPanel.add(fuelPanel);
         numGaugesPanel.add(helpPanel);
@@ -302,6 +311,7 @@ public class gauge extends javax.swing.JFrame {
         allButtonsPanel.add(throttleButtonPanel);
         allButtonsPanel.add(shiftButtonPanel);
         allButtonsPanel.add(modeButtonPanel);
+        allButtonsPanel.add(dragPanel);
         leftSidePanel.add(allButtonsPanel);
         rightSidePanel.add(leftSidePanel);
         rightSidePanel.add(numGaugesPanel);
@@ -606,6 +616,30 @@ public class gauge extends javax.swing.JFrame {
                 }
             }
         });
+        
+        dragButton.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseExited(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseEntered(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseReleased(MouseEvent evt){
+
+            }
+            @Override
+            public void mousePressed(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseClicked(MouseEvent evt){
+               Drag_tree dt = new Drag_tree();
+               dt.setVisible(true);
+            }
+        });
 
         frame.pack();
         frame.setVisible(true);   
@@ -647,6 +681,10 @@ public void ButtonLook() {
     shiftFeedback.setHorizontalTextPosition(JLabel.CENTER);
     shiftFeedback.setVerticalTextPosition(JLabel.CENTER);
     shiftFeedback.setText("Shift Feedback: (try shifting!)");
+    
+    dragButton.setText("Drag Racing");
+    dragButton.setContentAreaFilled(false);
+    dragButton.setFocusPainted(false);
 }
 public void goToSleep(int x){
     try {
