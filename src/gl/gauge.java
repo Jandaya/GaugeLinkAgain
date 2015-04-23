@@ -55,6 +55,7 @@ public class gauge extends javax.swing.JFrame {
     boolean isStart = false;
     boolean isEconomic = false;
     boolean mouseOnThrottle = false;
+    boolean frameOpen = false;
     double speedNum = 0;
     int x = 0;
     int boost = 0, currentGear = 1;
@@ -617,27 +618,17 @@ public class gauge extends javax.swing.JFrame {
             }
         });
         
-        dragButton.addMouseListener(new MouseListener(){
-            @Override
-            public void mouseExited(MouseEvent evt){
-                
-            }
-            @Override
-            public void mouseEntered(MouseEvent evt){
-                
-            }
-            @Override
-            public void mouseReleased(MouseEvent evt){
-
-            }
-            @Override
-            public void mousePressed(MouseEvent evt){
-                
-            }
-            @Override
-            public void mouseClicked(MouseEvent evt){
-               Drag_tree dt = new Drag_tree();
-               dt.setVisible(true);
+        dragButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Drag_tree dt = new Drag_tree();
+                if(!frameOpen){
+                    dt.setVisible(true);
+                    frameOpen=true;
+                }
+                else{
+                    frameOpen=false;
+                    dt.setVisible(false);
+                }
             }
         });
 
