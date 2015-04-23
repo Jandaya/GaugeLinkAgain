@@ -20,7 +20,7 @@ import javax.swing.Timer;
  * @version 1.0
  */
 public class Drag_tree extends JFrame {
-
+    
     private JLabel jLabel;
     private Timer timer1;
     private Timer timer2;
@@ -32,34 +32,34 @@ public class Drag_tree extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(600, 600);
         JPanel panel = new JPanel(new BorderLayout());
-        jLabel = new JLabel(new ImageIcon("C:\\Users\\user\\Documents\\NetBeansProjects\\GaugeLinkAgain\\src\\gl\\Drag_tree.png"));
+        jLabel = new JLabel(new ImageIcon("src\\gl\\Drag_tree.png"));
 
         panel.add(jLabel);
         timer1 = new Timer(500, new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                jLabel.setIcon(new ImageIcon("C:\\Users\\user\\Documents\\NetBeansProjects\\GaugeLinkAgain\\src\\gl\\Drag_tree1.png"));
+                jLabel.setIcon(new ImageIcon("src\\gl\\Drag_tree1.png"));
                 timer2 = new Timer(500, new ActionListener() {
                     
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        jLabel.setIcon(new ImageIcon("C:\\Users\\user\\Documents\\NetBeansProjects\\GaugeLinkAgain\\src\\gl\\Drag_tree2.png"));
+                        jLabel.setIcon(new ImageIcon("src\\gl\\Drag_tree2.png"));
                         timer3 = new Timer(500, new ActionListener() {
 
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                jLabel.setIcon(new ImageIcon("C:\\Users\\user\\Documents\\NetBeansProjects\\GaugeLinkAgain\\src\\gl\\Drag_tree3.png"));
+                                jLabel.setIcon(new ImageIcon("src\\gl\\Drag_tree3.png"));
                                 timer4 = new Timer(500, new ActionListener() {
 
                                     @Override
                                     public void actionPerformed(ActionEvent e) {
-                                        jLabel.setIcon(new ImageIcon("C:\\Users\\user\\Documents\\NetBeansProjects\\GaugeLinkAgain\\src\\gl\\Drag_tree4.png"));
+                                        jLabel.setIcon(new ImageIcon("src\\gl\\Drag_tree4.png"));
                                         timer5 = new Timer(500, new ActionListener() {
 
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
-                                                jLabel.setIcon(new ImageIcon("C:\\Users\\user\\Documents\\NetBeansProjects\\GaugeLinkAgain\\src\\gl\\Drag_tree5.png"));
+                                                jLabel.setIcon(new ImageIcon("src\\gl\\Drag_tree5.png"));
                                             }
                                         });
                                         timer5.start();

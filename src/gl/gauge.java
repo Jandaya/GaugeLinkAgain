@@ -682,7 +682,7 @@ public void ButtonLook() {
     shiftFeedback.setVerticalTextPosition(JLabel.CENTER);
     shiftFeedback.setText("Shift Feedback: (try shifting!)");
     
-    dragButton.setText("Drag Racing");
+    dragButton.setIcon(new ImageIcon(getClass().getResource("/gl/drag_icon.png")));
     dragButton.setContentAreaFilled(false);
     dragButton.setFocusPainted(false);
 }
