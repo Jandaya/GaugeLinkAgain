@@ -401,7 +401,37 @@ public class gauge extends javax.swing.JFrame {
             }
             @Override
             public void mouseClicked(MouseEvent evt){
-                
+                JOptionPane.showMessageDialog(null," Welcome to GaugeLink, a semi-automatic transmission simulator.  This program is designed to help individuals\n" +
+"understand the basics of driving a manual transimission car, or a car with a manual shifting option.  For\n" +
+"simplicity of learning, a clutch is not offered in this program.\n" +
+"\n" +
+"You will operate an accelerator ('shift' key) and two other buttons to shift up ('a' key) or shift down ('z' key) \n" +
+"through the gears of the transmission.  There will also be a series of gauges to inform you of how your car is \n" +
+"running.\n" +
+"\n" +
+"If this is your first time manually shifting gears on a vehicle, here are some gear/transmission basics.\n" +
+"\n" +
+"	- Lower gears provide easy, quick acceleration, but low top speed.  \n" +
+"		- Imagine riding a small BMX bicycle: it is very easy to pedal and get up to speed, but \n" +
+"		you may only achieve 10-13 mph.\n" +
+"		- If you are starting from a stop sign or red light, you should use first gear, and shift up\n" +
+"		as you build speed\n" +
+"	- Higher gears accelerate slowly, but can achieve very high speeds.  \n" +
+"		- Imagine riding a large mountain bicycle or road bicycle: the higher gears make it very \n" +
+"		difficult to pedal or accelerate, but you can relatively easily cruise above 24 mph and \n" +
+"		keep up with cars in local streets.\n" +
+"		- If you are holding a constant speed and not accelerating, you should use the highest gear\n" +
+"		that keeps your vehicle's RPM above 1800.\n" +
+"	- Most cars have usable power between 1800 - 3200 RPM.  \n" +
+"		- When you shift up gears, your RPM will drop with the same vehicle speed.  Try shifting up at \n" +
+"		the top of this range to keep RPM in between this range to maximize fuel economy.\n" +
+"		- When you shift down, your RPM will increase with the same vehicle speed.  Try shifting down\n" +
+"		at the bottom of this range to avoid over-revving your engine.\n" +
+"		- If you want to maximize performance, use the RPM range of 4000 to the rev limit (9000 in this\n" +
+"		case, varies by car).  However, this will burn more fuel, and revving over the limit can destroy\n" +
+"		your engine.\n" +
+"\n" +
+"Click next to proceed, and start your car when you are ready.  Happy shifting!");
             }
         });
         
