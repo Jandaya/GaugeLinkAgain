@@ -651,8 +651,9 @@ public class gauge extends javax.swing.JFrame {
         
         dragButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                
                 Drag_tree dt = new Drag_tree();
-                if(!frameOpen){
+                /*if(!frameOpen){
                     dt.setVisible(true);
                     frameOpen=true;
                 }
@@ -660,6 +661,7 @@ public class gauge extends javax.swing.JFrame {
                     frameOpen=false;
                     dt.setVisible(false);
                 }
+                */
             }
         });
 
