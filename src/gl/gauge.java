@@ -207,7 +207,7 @@ public class gauge extends javax.swing.JFrame {
         mphGauge.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
         mphGauge.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
         mphGauge.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
-        mphGauge.setMaxValue(120);
+        mphGauge.setMaxValue(200);
         rpmGauge.setBackgroundColor(eu.hansolo.steelseries.tools.BackgroundColor.BLACK);
         rpmGauge.setPointerColor(eu.hansolo.steelseries.tools.ColorDef.BLUE);
         rpmGauge.setLcdColor(eu.hansolo.steelseries.tools.LcdColor.BLUEGRAY_LCD);
