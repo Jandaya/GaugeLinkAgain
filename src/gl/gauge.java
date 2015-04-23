@@ -49,6 +49,7 @@ public class gauge extends javax.swing.JFrame {
     final static JButton shiftDownButton = new JButton();
     final static JButton modeButton = new JButton();
     final static JLabel shiftFeedback = new JLabel();
+    final static JButton resetButton = new JButton();
     boolean isStart = false;
     boolean isEconomic = false;
     boolean mouseOnThrottle = false;
@@ -153,9 +154,16 @@ public class gauge extends javax.swing.JFrame {
         JPanel bufferPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
-                return new Dimension(300, 400);
+                return new Dimension(300, 300);
             }
         };
+        JPanel resetPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(300, 80);
+            }
+        };
+        
         
         
         JPanel numGaugesPanel = new JPanel();
@@ -217,6 +225,9 @@ public class gauge extends javax.swing.JFrame {
         fuelPanel.setLayout(new BorderLayout());
         fuelPanel.add(fuelGauge, BorderLayout.CENTER);
         fuelPanel.setBackground(Color.darkGray);
+        resetPanel.setLayout(new BorderLayout());
+        resetPanel.add(resetButton, BorderLayout.CENTER);
+        resetPanel.setBackground(Color.darkGray);
         bufferPanel.setLayout(new BorderLayout());
         bufferPanel.setBackground(Color.darkGray);
         distancePanel.setLayout(new BorderLayout());
@@ -253,10 +264,15 @@ public class gauge extends javax.swing.JFrame {
         tempPanel.add(tempGauge, BorderLayout.CENTER);
         tempPanel.setBackground(Color.darkGray);
         shiftUpButton.setIcon(new ImageIcon(getClass().getResource("Neutral.png")));
+        resetButton.setBackground(Color.darkGray);
+        resetButton.setForeground(Color.red);
+        resetButton.setFont(new Font("Arial", Font.BOLD, 20));
+        resetButton.setText("RESET MILES TRAVELED");
         
         //topRowPanel.add(fuelPanel);
         numGaugesPanel.add(fuelPanel);
         numGaugesPanel.add(distancePanel);
+        numGaugesPanel.add(resetPanel);
         numGaugesPanel.add(bufferPanel);
         topRowPanel.add(mphPanel);
         topRowPanel.add(rpmPanel);
@@ -311,6 +327,31 @@ public class gauge extends javax.swing.JFrame {
             @Override
             public void mouseClicked(MouseEvent evt){
                 throttleButton.setBackground(Color.darkGray);
+            }
+        });
+        
+        resetButton.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseExited(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseEntered(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseReleased(MouseEvent evt){
+                
+            }
+            @Override
+            public void mousePressed(MouseEvent evt){
+                
+                
+            }
+            @Override
+            public void mouseClicked(MouseEvent evt){
+                distCovered = 0;
+                distanceGauge.setLcdValue(0);
             }
         });
         
