@@ -50,6 +50,7 @@ public class gauge extends javax.swing.JFrame {
     final static JButton modeButton = new JButton();
     final static JLabel shiftFeedback = new JLabel();
     final static JButton resetButton = new JButton();
+    final static JButton helpButton = new JButton();
     boolean isStart = false;
     boolean isEconomic = false;
     boolean mouseOnThrottle = false;
@@ -163,6 +164,12 @@ public class gauge extends javax.swing.JFrame {
                 return new Dimension(300, 80);
             }
         };
+        JPanel helpPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(300, 80);
+            }
+        };
         
         
         
@@ -228,6 +235,9 @@ public class gauge extends javax.swing.JFrame {
         resetPanel.setLayout(new BorderLayout());
         resetPanel.add(resetButton, BorderLayout.CENTER);
         resetPanel.setBackground(Color.darkGray);
+        helpPanel.setLayout(new BorderLayout());
+        helpPanel.add(helpButton, BorderLayout.CENTER);
+        helpPanel.setBackground(Color.darkGray);
         bufferPanel.setLayout(new BorderLayout());
         bufferPanel.setBackground(Color.darkGray);
         distancePanel.setLayout(new BorderLayout());
@@ -268,8 +278,13 @@ public class gauge extends javax.swing.JFrame {
         resetButton.setForeground(Color.red);
         resetButton.setFont(new Font("Arial", Font.BOLD, 20));
         resetButton.setText("RESET MILES TRAVELED");
+        helpButton.setBackground(Color.darkGray);
+        helpButton.setForeground(Color.yellow);
+        helpButton.setFont(new Font("Arial", Font.BOLD, 20));
+        helpButton.setText("NEED HELP? CLICK HERE");
         
         //topRowPanel.add(fuelPanel);
+        numGaugesPanel.add(helpPanel);
         numGaugesPanel.add(fuelPanel);
         numGaugesPanel.add(distancePanel);
         numGaugesPanel.add(resetPanel);
@@ -352,6 +367,30 @@ public class gauge extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent evt){
                 distCovered = 0;
                 distanceGauge.setLcdValue(0);
+            }
+        });
+        
+        helpButton.addMouseListener(new MouseListener(){
+            @Override
+            public void mouseExited(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseEntered(MouseEvent evt){
+                
+            }
+            @Override
+            public void mouseReleased(MouseEvent evt){
+                
+            }
+            @Override
+            public void mousePressed(MouseEvent evt){
+                
+                
+            }
+            @Override
+            public void mouseClicked(MouseEvent evt){
+                
             }
         });
         
