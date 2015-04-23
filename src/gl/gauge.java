@@ -561,6 +561,7 @@ public class gauge extends javax.swing.JFrame {
                         x = changeUp(x);
                         currentGear+=1;
                         gearIncrease=Integer.toString(currentGear);
+                        changeGearImage();
                         //shiftUpButton.setText("SHIFT UP BUTTON: gear " + gearIncrease);
                         shiftDownButton.setText("SHIFT DOWN BUTTON: gear " + gearIncrease);
                         //gearNumber.setText(gearIncrease);
@@ -1026,7 +1027,7 @@ public void shiftTell(int x)
 {
     if(!isEconomic)
     {
-        if(x > 9000)
+        if(x >= PerfLowerBound && x <= PerfUpperBound)
         {
             rpmGauge.setLedColor(LedColor.GREEN_LED);
             //shiftTell.setText("Shift Up");
@@ -1038,7 +1039,7 @@ public void shiftTell(int x)
     }
     else
     {
-        if(x > 1800 && x < 2500)
+        if(x >= EcoLowerBound && x <= EcoUpperBound)
         {
             rpmGauge.setLedColor(LedColor.GREEN_LED);
             //shiftTell.setText("Shift Up");
@@ -1049,31 +1050,35 @@ public void shiftTell(int x)
         }
     }
 }
+    public static final int EcoUpperBound = 2500;
+    public static final int EcoLowerBound = 1800;
+    public static final int PerfLowerBound = 8500;
+    public static final int PerfUpperBound = 9200;
 
 
 private void checkShift(int x, boolean eco){
     
-    if(x < 1800 && eco){
+    if(x <= EcoLowerBound && eco){
         //checkShiftLabel.setText("Early shift.");
         shiftFeedback.setForeground(Color.red);
         shiftFeedback.setText("Shift Feedback: Early shift!");
     }
-    else if(x > 1800 && x < 2500 && eco){
+    else if(x >= EcoLowerBound && x <= EcoUpperBound && eco){
         //checkShiftLabel.setText("Good economic shift!");
         shiftFeedback.setForeground(Color.green);
         shiftFeedback.setText("Shift Feedback: Good economic shift!");
     }
-    else if (x > 2500 && eco){
+    else if (x >= EcoUpperBound && eco){
         //checkShiftLabel.setText("Late shift.");
         shiftFeedback.setForeground(Color.red);
         shiftFeedback.setText("Shift Feedback: Late shift!");
     }
-    if(x < 8500 && !eco){
+    if(x <= PerfLowerBound && !eco){
          //checkShiftLabel.setText("Early shift. (Too soon junior!)");
         shiftFeedback.setForeground(Color.red);
         shiftFeedback.setText("Shift Feedback: Early shift (too soon junior)!");
     }
-    if(x > 8500 && x < 9200 && !eco){
+    if(x >= PerfLowerBound && x <= PerfUpperBound && !eco){
          //checkShiftLabel.setText("Good performance shift!");
         shiftFeedback.setForeground(Color.green);
         shiftFeedback.setText("Shift Feedback: Good performance shift!");
