@@ -26,14 +26,7 @@ public class Drag_tree extends JFrame {
     private JLabel jLabel;
     Timer timer1;
     int count = 1;
-
-    public static final String[] image_path = {
-        "src\\gl\\Drag_tree1.png",
-        "src\\gl\\Drag_tree2.png",
-        "src\\gl\\Drag_tree3.png",
-        "src\\gl\\Drag_tree4.png",
-        "src\\gl\\Drag_tree5.png"
-    };
+    
     public Drag_tree() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(600, 600);
@@ -50,9 +43,14 @@ public class Drag_tree extends JFrame {
                     jLabel.setIcon(new ImageIcon("src\\gl\\Drag_tree"+Integer.toString(loop)+".png"));
                     loop++;
                 } 
+                else if(loop > 8)
+                {
+                    Drag_tree.this.dispose();
+                }
                 else {
                     jLabel.setIcon(new ImageIcon("src\\gl\\Drag_tree5.png"));
-                    timer1.cancel();
+                    //timer1.cancel();
+                    loop++;
                 }
             }
             
