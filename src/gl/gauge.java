@@ -623,6 +623,10 @@ private void initThread() {
                     rpmGauge.setValue(x);
                     //rpm.setText(rpmIncrease + " RPM");
                     
+                    
+                    fuelGauge.setLcdValue(calcFuel());
+                    distanceGauge.setLcdValue(calcDist());
+                    
                     //increase boost with a limit of 20
                     boost++;
                     boostIncrease = Integer.toString(boost);
@@ -854,12 +858,12 @@ public int isVtec(int x){
     return x;
 }
 
-public void calcFuel() {
-    fuelUsed += (x/(currentGear*200));    
+public int calcFuel() {
+    return fuelUsed += (x/(currentGear*200));    
 }
 
-public void calcDist() {
-    distCovered += (speedNum/3600);    
+public double calcDist() {
+    return distCovered += (speedNum/3600);    
 }
 
 public boolean isRaceDone() {

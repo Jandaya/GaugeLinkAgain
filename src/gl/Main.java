@@ -38,9 +38,9 @@ public class Main {
 	frame.setSize(700, 500);
 	frame.setVisible(true);
         */
-        
         gauge displayG = new gauge();
         displayG.createAndShowUI();
+       // JOptionPane.showMessageDialog(null," ");
         
     }
     
