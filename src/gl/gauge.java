@@ -59,7 +59,7 @@ public class gauge extends javax.swing.JFrame {
     double speedNum = 0;
     int x = 0;
     int boost = 0, currentGear = 1;
-    int fuelUsed = 0;
+    double fuelUsed = 0;
     double distCovered = 0;
     String gearIncrease, gearDecrease, speedIncrease, speedDecrease, rpmIncrease, rpmDecrease, boostIncrease, boostDecrease;
     boolean buttonPressed = false;
@@ -799,7 +799,12 @@ private void initThread() {
                             rpmDecrease = Integer.toString(x);
                             rpmGauge.setValue(x);
                             //rpm.setText(rpmDecrease + " RPM");
-                        } 
+                        }
+                        
+                        fuelGauge.setLcdValue(calcFuel());
+                        distanceGauge.setLcdValue(calcDist());
+                        
+                        
                         
                         // decrement boost, only allow for -25
                         boost--;
@@ -967,12 +972,12 @@ public int isVtec(int x){
     return x;
 }
 
-public int calcFuel() {
-    return fuelUsed += (x/(currentGear*200));    
+public double calcFuel() {
+    return speedNum/(x/(currentGear*200));    
 }
 
 public double calcDist() {
-    return distCovered += (speedNum/3600);    
+    return distCovered += (speedNum/36000);    
 }
 
 public boolean isRaceDone() {
