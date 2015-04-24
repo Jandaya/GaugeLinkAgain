@@ -751,8 +751,11 @@ private synchronized boolean checkAndMark() {
 private void treeThread(){
     new Thread(){
         public void run(){
-            goToSleep(4000);
+            goToSleep(2300);
             //this is where you reactivate the buttons
+            startButton.setIcon(new ImageIcon(getClass().getResource("/gl/start_button.png.png")));
+            isStart = true;
+            startValues();
             
         }
     }.start();
