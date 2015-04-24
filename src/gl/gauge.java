@@ -54,11 +54,14 @@ public class gauge extends javax.swing.JFrame {
     final static JButton resetButton = new JButton();
     final static JButton helpButton = new JButton();
     final static JButton dragButton = new JButton();
+    final static DisplaySingle raceTime = new DisplaySingle();
+    final static DisplaySingle bestRaceTime = new DisplaySingle();
     boolean isStart = false;
     boolean isEconomic = false;
     boolean mouseOnThrottle = false;
     boolean frameOpen = false;
     double speedNum = 0;
+    boolean raceOn = true;
     int x = 0;
     int boost = 0, currentGear = 1;
     double fuelUsed = 0;
@@ -66,6 +69,8 @@ public class gauge extends javax.swing.JFrame {
     String gearIncrease, gearDecrease, speedIncrease, speedDecrease, rpmIncrease, rpmDecrease, boostIncrease, boostDecrease;
     boolean buttonPressed = false;
     private boolean mouseDown = false;
+    double rTime = 0;
+    double bestTime = 300000;
     
     
     
@@ -159,7 +164,7 @@ public class gauge extends javax.swing.JFrame {
         JPanel bufferPanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
-                return new Dimension(300, 300);
+                return new Dimension(300, 200);
             }
         };
         JPanel resetPanel = new JPanel() {
@@ -169,6 +174,18 @@ public class gauge extends javax.swing.JFrame {
             }
         };
         JPanel helpPanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(300, 80);
+            }
+        };
+        JPanel raceTimePanel = new JPanel() {
+            @Override 
+            public Dimension getPreferredSize() {
+                return new Dimension(300, 80);
+            }
+        };
+        JPanel braceTimePanel = new JPanel() {
             @Override 
             public Dimension getPreferredSize() {
                 return new Dimension(300, 80);
@@ -241,6 +258,12 @@ public class gauge extends javax.swing.JFrame {
         fuelPanel.setLayout(new BorderLayout());
         fuelPanel.add(fuelGauge, BorderLayout.CENTER);
         fuelPanel.setBackground(Color.darkGray);
+        raceTimePanel.setLayout(new BorderLayout());
+        raceTimePanel.add(raceTime, BorderLayout.CENTER);
+        raceTimePanel.setBackground(Color.darkGray);
+        braceTimePanel.setLayout(new BorderLayout());
+        braceTimePanel.add(bestRaceTime, BorderLayout.CENTER);
+        braceTimePanel.setBackground(Color.darkGray);
         resetPanel.setLayout(new BorderLayout());
         resetPanel.add(resetButton, BorderLayout.CENTER);
         resetPanel.setBackground(Color.darkGray);
@@ -294,12 +317,18 @@ public class gauge extends javax.swing.JFrame {
         dragPanel.setLayout(new BorderLayout());
         dragPanel.add(dragButton, BorderLayout.CENTER);
         dragPanel.setBackground(Color.darkGray);
+        bestRaceTime.setLcdInfoString("Your best race time:");
+        raceTime.setLcdInfoString("Stopwatch of the race:");
+        bestRaceTime.setLcdUnitString("seconds");
+        raceTime.setLcdUnitString("seconds");
         
         //topRowPanel.add(fuelPanel);
         numGaugesPanel.add(helpPanel);
         numGaugesPanel.add(fuelPanel);
         numGaugesPanel.add(distancePanel);
         numGaugesPanel.add(resetPanel);
+        numGaugesPanel.add(raceTimePanel);
+        numGaugesPanel.add(braceTimePanel);
         numGaugesPanel.add(bufferPanel);
         topRowPanel.add(mphPanel);
         topRowPanel.add(rpmPanel);
@@ -756,6 +785,16 @@ private void treeThread(){
             startButton.setIcon(new ImageIcon(getClass().getResource("/gl/start_button.png.png")));
             isStart = true;
             startValues();
+            rTime = 0;
+            while (!isRaceDone()){
+                goToSleep(100);
+                rTime += 0.1;
+                raceTime.setLcdValue(rTime);    
+            }
+            if (rTime < bestTime){
+                bestTime = rTime;
+                bestRaceTime.setLcdValue(rTime);
+            }
             
         }
     }.start();
@@ -913,6 +952,7 @@ private void startValues(){
         startButton.setEnabled(true);
         fuelGauge.setLcdValue(0);
         distanceGauge.setLcdValue(0);
+        distCovered = 0;
                         
         if(isEconomic){
             //ModePic.setIcon(leaf);
@@ -929,6 +969,7 @@ private void stopValues(){
         mphGauge.setValue(0);
         boostGauge.setValue(boost);
         currentGear = 0;
+        distCovered = 0;
         //shiftUpButton.setText("SHIFT UP BUTTON: gear 0");
         shiftDownButton.setText("SHIFT DOWN BUTTON: gear 0");
         //speed.setText("0 MPH");
