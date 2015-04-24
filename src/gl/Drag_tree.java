@@ -31,7 +31,7 @@ public class Drag_tree extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(600, 600);
         JPanel panel = new JPanel(new BorderLayout());
-        jLabel = new JLabel(new ImageIcon("src\\gl\\Drag_tree.png"));
+        jLabel = new JLabel(new ImageIcon("Drag_tree.png"));
         panel.add(jLabel);
         timer1 = new Timer();
         timer1.schedule(new TimerTask() {
@@ -39,7 +39,7 @@ public class Drag_tree extends JFrame {
             
             public void run() {
                 if (loop < 6) {
-                    jLabel.setIcon(new ImageIcon("src\\gl\\Drag_tree"+Integer.toString(loop)+".png"));
+                    jLabel.setIcon(new ImageIcon(getClass().getResource("Drag_tree"+Integer.toString(loop)+".png")));
                     loop++;
                 } 
                 else if(loop > 8)
@@ -49,7 +49,7 @@ public class Drag_tree extends JFrame {
                   
                 }
                 else {
-                    jLabel.setIcon(new ImageIcon("src\\gl\\Drag_tree5.png"));
+                    jLabel.setIcon(new ImageIcon(getClass().getResource("Drag_tree5.png")));
                     //timer1.cancel();
                     loop++;
                 }
