@@ -684,14 +684,17 @@ public class gauge extends javax.swing.JFrame {
         dragButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
-                Drag_tree dt = new Drag_tree();
+                Drag_tree dt; 
                 
-                if (isStart){
+                if (!frameOpen){
+                    dt = new Drag_tree();
                     startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
+                    frameOpen = true;
                     isStart = false;
                     stopValues();
+                    treeThread();
                 }
-                treeThread();
+                
                 /*
                 while (dt.getTreeStatus() != true){
                     if(dt.getTreeStatus()){
@@ -795,7 +798,7 @@ private void treeThread(){
                 bestTime = rTime;
                 bestRaceTime.setLcdValue(rTime);
             }
-            
+            frameOpen = false;
         }
     }.start();
 }
