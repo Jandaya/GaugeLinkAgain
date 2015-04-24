@@ -986,7 +986,7 @@ private void stopValues(){
         startButton.setEnabled(true);
         fuelGauge.setLcdValue(0);
         distanceGauge.setLcdValue(0);
-        
+        shiftUpButton.setIcon(new ImageIcon(getClass().getResource("Neutral.png")));
         //ModePic.setIcon(new ImageIcon(""));
         //isEconomic = true;
         isStart = false;
