@@ -34,6 +34,8 @@ import java.awt.event.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.*;
+import java.util.TimerTask;
+import java.util.Timer;
 
 
 public class gauge extends javax.swing.JFrame {
@@ -653,6 +655,26 @@ public class gauge extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 
                 Drag_tree dt = new Drag_tree();
+                
+                if (isStart){
+                    startButton.setIcon(new ImageIcon(getClass().getResource("/gl/stop_button.png")));
+                    isStart = false;
+                    stopValues();
+                }
+                /*
+                while (dt.getTreeStatus() != true){
+                    if(dt.getTreeStatus()){
+                        startButton.setIcon(new ImageIcon(getClass().getResource("/gl/start_button.png.png")));
+                        isStart = true;
+                        startValues();
+                        break;
+                    }
+                }*/
+                /*else{
+                    startButton.setIcon(new ImageIcon(getClass().getResource("/gl/start_button.png.png")));
+                    isStart = true;
+                    startValues();
+                }*/
                 /*if(!frameOpen){
                     dt.setVisible(true);
                     frameOpen=true;
@@ -876,7 +898,9 @@ private void startValues(){
         //shiftUpButton.setText("SHIFT UP BUTTON: gear 1");
         shiftDownButton.setText("SHIFT DOWN BUTTON: gear 1");
         startButton.setEnabled(true);
-        
+        fuelGauge.setLcdValue(0);
+        distanceGauge.setLcdValue(0);
+                        
         if(isEconomic){
             //ModePic.setIcon(leaf);
         }
@@ -903,6 +927,8 @@ private void stopValues(){
         //shiftUpButton.setEnabled(false);
         //shiftDownButton.setEnabled(false);
         startButton.setEnabled(true);
+        fuelGauge.setLcdValue(0);
+        distanceGauge.setLcdValue(0);
         
         //ModePic.setIcon(new ImageIcon(""));
         //isEconomic = true;
