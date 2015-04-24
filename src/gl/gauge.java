@@ -434,6 +434,7 @@ public class gauge extends javax.swing.JFrame {
 "		your engine.\n" +
 "\n" +
 "Click next to proceed, and start your car when you are ready.  Happy shifting!");
+                
             }
         });
         
@@ -661,6 +662,7 @@ public class gauge extends javax.swing.JFrame {
                     isStart = false;
                     stopValues();
                 }
+                treeThread();
                 /*
                 while (dt.getTreeStatus() != true){
                     if(dt.getTreeStatus()){
@@ -746,7 +748,15 @@ private synchronized boolean checkAndMark() {
     return true;
 } 
 
-
+private void treeThread(){
+    new Thread(){
+        public void run(){
+            goToSleep(4000);
+            //this is where you reactivate the buttons
+            
+        }
+    }.start();
+}
 
 // creates a thread in run time
 private void initThread() {
